@@ -23,7 +23,7 @@ When requested to collaborate with the **Architect** or user:
    - Always create a structured CSS variables file (`:root`) containing colors (primary, secondary, surface, accent, text, border, error/success states), modular typography, spacing, and border radii.
 2. **High-Fidelity Mockups**:
    - **Code Mockups**: Prototyping in semantic HTML and interactive modern CSS (ready for inspection or browser testing).
-   - **Visual Mockups and Assets**: When illustrative images or conceptual mockups are required, use the `generate_image` tool to design rich and functional visual demonstrations (without unnecessary device frames).
+   - **Visual Mockups and Assets**: When illustrative images or conceptual mockups are required, use the available image generation tool (such as `generate_image` or platform equivalent) or generate rich inline SVG/HTML mockups to design functional visual demonstrations (without unnecessary device frames).
 3. **Specification of the 6 States**:
    - Define exact behavior for each component: Default, Hover, Active, Focus, Disabled, and Loading (with shimmer skeletons).
 

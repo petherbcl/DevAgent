@@ -89,3 +89,17 @@ flowchart TD
     
     SecurityGate -- "Approved: Security Sign-Off" --> Build[Secure Application Ready for Delivery]
 ```
+
+---
+
+## 💻 Multi-Platform Compatibility (Codex, Claude, Cursor, Gemini)
+
+This ecosystem is designed to run seamlessly across all major AI coding platforms:
+
+| Platform / Tool | Configuration File | Role Invocation & Behavior |
+|---|---|---|
+| **Cursor** | [.cursorrules](file:///.cursorrules) | Tag `@Architect`, `@WebDesigner`, `@DevJunior`, `@DevSenior`, `@Security` in Chat / Composer |
+| **Claude / Claude Code** | [CLAUDE.md](file:///CLAUDE.md) | Native instruction discovery in Claude Code CLI & Claude Projects |
+| **OpenAI Codex / Copilot** | [CODEX.md](file:///CODEX.md), [.github/copilot-instructions.md](file:///.github/copilot-instructions.md) | Loaded automatically in Codex environments and GitHub Copilot |
+| **Gemini / Antigravity** | [GEMINI.md](file:///GEMINI.md), [AGENTS.md](file:///AGENTS.md) | Full multi-agent discovery via `.agents/personas/`, `.agents/rules/`, and `.agents/skills/` |
+

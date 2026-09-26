@@ -63,9 +63,9 @@ Always create a base token block in `styles/design-tokens.css` or `src/index.css
 - Create functional prototypes with flexbox/CSS grid and bento layouts in `mockups/<screen>.html`.
 - Ensure all buttons and inputs feature interactive classes demonstrating hover, focus, and visual feedback.
 
-### B. Visual Mockups with AI (`generate_image`)
+### B. Visual Mockups with AI / Code
 - When the user or Architect requests a high-impact visual mockup prior to coding:
-  - Use the `generate_image` tool.
+  - Use available image generation tools (e.g., `generate_image`, DALL-E) or interactive HTML/SVG mockups.
   - **Guideline**: Generate only the user interface itself, without unnecessary phone or laptop frames.
   - Specify details such as: *"Modern dark mode SaaS dashboard UI, bento grid layout, subtle glassmorphism cards, glowing vibrant indigo and cyan charts, ultra-clean typography, photorealistic crisp graphics"*.
 

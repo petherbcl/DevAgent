@@ -153,3 +153,17 @@ All agents adhere to centralized rules in `.agents/rules/`:
    - After each developer development cycle, the **Security Specialist** audits code against OWASP and Secure Coding standards.
    - If gaps are found, they generate `security-plan.md` with prioritized tasks for developers.
    - When the code is 100% secure, they issue the **Security Sign-Off** for acceptance and delivery.
+
+---
+
+## 💻 Multi-Platform Compatibility (Codex, Claude, Cursor, Gemini)
+
+This ecosystem is ready for out-of-the-box use across the major AI coding environments:
+
+| Platform / Tool | Native Config File | How to Use |
+|---|---|---|
+| **Cursor** | [.cursorrules](file:///.cursorrules) | Tag `@Architect`, `@WebDesigner`, `@DevJunior`, `@DevSenior`, `@Security` in Chat, Composer, or Agent mode. |
+| **Claude / Claude Code** | [CLAUDE.md](file:///CLAUDE.md) | Automatically loaded by Claude Code CLI and Claude Projects. Mention desired role in prompts. |
+| **OpenAI Codex / Copilot** | [CODEX.md](file:///CODEX.md), [.github/copilot-instructions.md](file:///.github/copilot-instructions.md) | Automatically injected in OpenAI Codex sessions and GitHub Copilot chats. |
+| **Gemini / Antigravity** | [GEMINI.md](file:///GEMINI.md), [AGENTS.md](file:///AGENTS.md) | Native discovery via `.agents/personas/`, `.agents/rules/`, and `.agents/skills/`. |
+
