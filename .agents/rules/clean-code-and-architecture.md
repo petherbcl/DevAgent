@@ -1,59 +1,59 @@
-# Boas Práticas de Programação, Clean Code e Arquitetura
+# Programming Best Practices, Clean Code, and Architecture
 
-Este documento define os princípios de escrita de código, manutenibilidade e qualidade de software aplicáveis a todos os ficheiros do projeto.
-
----
-
-## 1. Princípios de Clean Code
-
-### 1.1 Nomenclatura e Legibilidade
-- **Nomes Intencionais e Reveladores**:
-  - Evite abreviações obscuras (ex: use `userRegistrationDate` em vez de `uRegDt` ou `d`).
-  - Funções devem indicar ações claras com verbos (ex: `calculateCartTotal()`, `validateSessionToken()`, `fetchUserOrders()`).
-  - Variáveis booleanas devem responder a perguntas sim/não com prefixos adequados: `isAvailable`, `hasPermissions`, `shouldRetry`.
-- **Comprimento e Escopo de Funções**:
-  - Cada função deve fazer **uma única coisa** e fazê-la bem.
-  - Funções curtas e focadas (idealmente com menos de 30-40 linhas).
-  - Níveis de aninhamento (*indentation depth*) reduzidos: utilize *Guard Clauses* (retorno antecipado) para eliminar múltiplos blocos `if/else` encadeados.
-
-### 1.2 Princípios KISS, DRY e YAGNI
-- **KISS (Keep It Simple, Stupid)**: A solução mais simples que resolve o problema de forma robusta é sempre a melhor. Evite sobre-engenharia (*over-engineering*).
-- **DRY (Don't Repeat Yourself)**: Reutilize lógica de negócio idêntica, mas evite abstrações prematuras (*A duplicação pontual é preferível à abstração errada*).
-- **YAGNI (You Aren't Gonna Need It)**: Não implemente funcionalidades, parâmetros ou camadas de flexibilidade antecipadamente com base em suposições futuras que não foram solicitadas.
+This document defines coding standards, maintainability guidelines, and software quality principles applicable to all project files.
 
 ---
 
-## 2. Princípios SOLID Aplicados
+## 1. Clean Code Principles
+
+### 1.1 Naming and Readability
+- **Intentional, Revealing Names**:
+  - Avoid obscure abbreviations (e.g., use `userRegistrationDate` instead of `uRegDt` or `d`).
+  - Functions must indicate clear actions using verbs (e.g., `calculateCartTotal()`, `validateSessionToken()`, `fetchUserOrders()`).
+  - Boolean variables should answer yes/no questions with proper prefixes: `isAvailable`, `hasPermissions`, `shouldRetry`.
+- **Function Length and Scope**:
+  - Each function must do **one thing only** and do it well.
+  - Short and focused functions (ideally under 30-40 lines).
+  - Reduced indentation depth: use *Guard Clauses* (early return) to eliminate deeply nested `if/else` blocks.
+
+### 1.2 KISS, DRY, and YAGNI Principles
+- **KISS (Keep It Simple, Stupid)**: The simplest solution that robustly solves the problem is always best. Avoid over-engineering.
+- **DRY (Don't Repeat Yourself)**: Reuse identical business logic, but avoid premature abstractions (*Incidental duplication is preferable to the wrong abstraction*).
+- **YAGNI (You Aren't Gonna Need It)**: Do not implement features, parameters, or flexibility layers in advance based on unrequested future assumptions.
+
+---
+
+## 2. Applied SOLID Principles
 
 1. **S - Single Responsibility Principle (SRP)**:
-   - Uma classe, ficheiro ou módulo deve ter um e apenas um motivo para mudar. Separe lógica de validação de persistência e de apresentação.
+   - A class, file, or module should have one, and only one, reason to change. Separate validation, persistence, and presentation logic.
 2. **O - Open/Closed Principle (OCP)**:
-   - Entidades devem estar abertas para extensão, mas fechadas para modificação. Use polimorfismo, interfaces e estratégias (*Strategy Pattern*) para novos comportamentos.
+   - Software entities should be open for extension, but closed for modification. Use polymorphism, interfaces, and strategies (*Strategy Pattern*) for new behaviors.
 3. **L - Liskov Substitution Principle (LSP)**:
-   - Subclasses ou implementações de interfaces devem poder substituir seus tipos base sem alterar o comportamento esperado do programa.
+   - Subclasses or interface implementations must be substitutable for their base types without altering expected program behavior.
 4. **I - Interface Segregation Principle (ISP)**:
-   - Mantenha interfaces pequenas e coesas. Nenhum cliente deve ser forçado a depender de métodos que não utiliza.
+   - Keep interfaces small and cohesive. No client should be forced to depend on methods it does not use.
 5. **D - Dependency Inversion Principle (DIP)**:
-   - Módulos de alto nível não devem depender de módulos de baixo nível; ambos devem depender de abstrações (interfaces). Injetar dependências sempre que for viável para facilitar testes automatizados.
+   - High-level modules should not depend on low-level modules; both should depend on abstractions (interfaces). Inject dependencies wherever feasible to facilitate automated testing.
 
 ---
 
-## 3. Gestão de Erros e Programação Defensiva
-- **Erros Explícitos**: Nunca capture erros em blocos vazios (`catch (e) {}` sem tratamento ou log). Trate o erro ou propague-o com contexto adicional.
-- **Fail Fast (Falha Rápida)**: Valide pré-condições no início da execução da função e interrompa imediatamente se os dados forem inválidos.
-- **Imutabilidade**: Prefira estruturas imutáveis (`const`, `ReadonlyArray`, `Object.freeze` onde aplicável). Evite mutações colaterais de objetos passados por referência.
+## 3. Error Handling and Defensive Programming
+- **Explicit Errors**: Never swallow errors in empty blocks (`catch (e) {}` without handling or logging). Handle the error or rethrow it with additional context.
+- **Fail Fast**: Validate preconditions at the start of function execution and fail immediately if data is invalid.
+- **Immutability**: Prefer immutable structures (`const`, `ReadonlyArray`, `Object.freeze` where applicable). Avoid side-effect mutations on objects passed by reference.
 
 ---
 
-## 4. Tipagem Forte e Segurança de Tipos
-- Em projetos TypeScript:
-  - **Proibido o uso de `any`**. Use `unknown` com asserção de tipo e validação de schema quando o tipo for incerto.
-  - Crie tipos e interfaces explícitos para todas as entidades de domínio e payloads de API.
-  - Utilize uniões discriminadas (*discriminated unions*) para modelar estados que se excluem mutuamente.
+## 4. Strong Typing and Type Safety
+- In TypeScript projects:
+  - **Use of `any` is prohibited**. Use `unknown` with type narrowing and schema validation when the type is uncertain.
+  - Create explicit types and interfaces for all domain entities and API payloads.
+  - Use discriminated unions to model mutually exclusive states.
 
 ---
 
-## 5. Diretrizes de Refatoração (Dev Senior)
-- Toda a refatoração deve manter o comportamento funcional intacto.
-- Assegure-se de que os testes existentes continuam a passar antes e depois da refatoração.
-- Aplique a **Regra do Escoteiro**: *Deixe sempre o código mais limpo do que quando o encontrou*.
+## 5. Refactoring Guidelines (Senior Dev)
+- All refactoring must keep functional behavior intact.
+- Ensure existing tests pass before and after refactoring.
+- Apply the **Boy Scout Rule**: *Always leave the code cleaner than you found it*.

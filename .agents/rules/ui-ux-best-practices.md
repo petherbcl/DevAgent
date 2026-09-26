@@ -1,84 +1,84 @@
-# Regras e Boas Práticas Universais de UI & UX
+# Universal UI & UX Rules and Best Practices
 
-Este documento define o padrão obrigatório de User Interface (UI) e User Experience (UX) que deve ser respeitado pelo **Arquiteto**, pelo **WebDesigner** e pelos **Desenvolvedores (Junior e Senior)**.
-
----
-
-## 1. Princípios Fundamentais de UX (Experiência do Utilizador)
-
-### 1.1 Heurísticas de Usabilidade (Nielsen Norman Group)
-1. **Visibilidade do Estado do Sistema**:
-   - Fornecer sempre feedback imediato sobre qualquer ação (carregamento, sucesso, erro).
-   - Utilizar estados de carregamento elegantes: *Skeleton screens* com animação shimmer para carregamentos de conteúdo estruturado; spinners discretos para ações inline em botões.
-2. **Correspondência entre o Sistema e o Mundo Real**:
-   - Usar linguagem clara, terminologia do utilizador e evitar códigos de erro de sistema brutos (ex.: mostrar "Não foi possível validar o e-mail" em vez de "Error: RegexValidationError at line 42").
-3. **Controlo e Liberdade do Utilizador**:
-   - Disponibilizar ações claras para desfazer (*Undo*), fechar janelas modais com tecla `Escape` ou clique exterior, e confirmações seguras antes de operações destrutivas.
-4. **Consistência e Padrões**:
-   - Manter consistência semântica: botões de ação primária com a mesma cor e posição; ícones com significados universais e constantes.
-5. **Prevenção e Tratamento de Erros**:
-   - Validação inline de campos em tempo real (on blur ou com debounce no input).
-   - Mensagens de erro construtivas: indicar **o que aconteceu**, **por que aconteceu** e **como resolver**.
-6. **Reconhecimento em vez de Recordação**:
-   - Minimizar a carga cognitiva: disponibilizar sugestões, históricos recentes e campos pré-preenchidos sempre que apropriado.
-7. **Flexibilidade e Eficiência de Uso**:
-   - Permitir atalhos de teclado para utilizadores frequentes e comandos rápidos (ex: `Cmd+K` / `Ctrl+K` para busca global).
-8. **Estética e Design Minimalista**:
-   - Remover elementos desnecessários. O espaço em branco (*whitespace/negative space*) é uma ferramenta de design, não espaço vazio a preencher.
-
-### 1.2 Leis de UX
-- **Lei de Fitts**: Elementos interativos críticos (botões primários, CTAs) devem ter tamanho e proximidade adequados. A área mínima clicável recomendada para touch/desktop é de **44x44px**.
-- **Lei de Hick**: Reduzir a quantidade de escolhas simultâneas para acelerar a tomada de decisão do utilizador.
-- **Lei de Jakob**: O utilizador espera que o seu sistema se comporte de forma familiar aos outros websites e sistemas de referência que já utiliza.
+This document defines the mandatory User Interface (UI) and User Experience (UX) standards that must be upheld by the **Architect**, **WebDesigner**, and **Developers (Junior and Senior)**.
 
 ---
 
-## 2. Padrões de UI (Design Visual e Estética)
+## 1. Core UX Principles (User Experience)
 
-### 2.1 Paleta de Cores e Contraste
-- **Proibido o uso de cores genéricas primárias brutas** (como `#FF0000` puro, `#00FF00` puro ou `#0000FF` puro).
-- Adotar paletas calibradas em HSL/OKLCH com contraste adequado:
-  - Rácio de contraste mínimo de **4.5:1** para texto normal e **3:1** para texto grande/componentes de UI (WCAG 2.1 nível AA).
-- **Regra 60-30-10**:
-  - **60%**: Cor dominante/neutra de fundo (ex: superfície escura elegante `#0B0F19` ou cinza suave `#F8FAFC`).
-  - **30%**: Cor secundária de superfície/cartões (ex: `#111827` ou `#FFFFFF` com bordas subtis).
-  - **10%**: Cor de destaque/acento (*accent*) para CTAs, botões ativos e indicadores chave (ex: Indigo `#6366F1`, Violeta `#8B5CF6`, ou Esmeralda `#10B981`).
-- **Dark Mode Moderno**:
-  - Nunca usar preto absoluto (`#000000`) para o fundo principal; usar tons ricos como Ardósia Profunda (`#0B0F17` / `#0F172A`).
-  - Camadas de elevação (*Elevation*) expressas por aumento subtil de luminosidade e bordas de 1px com transparência (`rgba(255, 255, 255, 0.08)`).
+### 1.1 Usability Heuristics (Nielsen Norman Group)
+1. **Visibility of System Status**:
+   - Always provide immediate feedback on any action (loading, success, error).
+   - Use elegant loading states: *Skeleton screens* with shimmer animations for structured content loading; discrete spinners for inline button actions.
+2. **Match Between System and the Real World**:
+   - Use plain language, user-centric terminology, and avoid raw system error codes (e.g.: display "Unable to validate email" instead of "Error: RegexValidationError at line 42").
+3. **User Control and Freedom**:
+   - Provide clear actions to undo (*Undo*), close modal windows with `Escape` or outside clicks, and prompt safe confirmations before destructive operations.
+4. **Consistency and Standards**:
+   - Maintain semantic consistency: primary action buttons share identical color and placement; icons carry universal, consistent meanings.
+5. **Error Prevention and Handling**:
+   - Real-time inline field validation (on blur or debounced on input).
+   - Constructive error messages: indicate **what happened**, **why it happened**, and **how to resolve it**.
+6. **Recognition Rather Than Recall**:
+   - Minimize cognitive load: offer suggestions, recent history, and pre-filled fields wherever appropriate.
+7. **Flexibility and Efficiency of Use**:
+   - Enable keyboard shortcuts for power users and quick commands (e.g.: `Cmd+K` / `Ctrl+K` for global search).
+8. **Aesthetic and Minimalist Design**:
+   - Eliminate unnecessary elements. Whitespace (*negative space*) is a design tool, not empty room to fill.
 
-### 2.2 Tipografia
-- Tipografia moderna e legível via Google Fonts (ex.: **Inter**, **Plus Jakarta Sans**, **Outfit**, **Geist**, ou **Fira Code** para código).
-- Escala modular rigorosa:
-  - Display/H1: `2.25rem` a `3rem` (36px a 48px) com `font-weight: 700` ou `800`.
-  - H2: `1.75rem` a `2rem` (28px a 32px) com `font-weight: 600`.
-  - H3: `1.25rem` a `1.5rem` (20px a 24px) com `font-weight: 600`.
-  - Body: `1rem` (16px), line-height de `1.5` a `1.6` para leitura confortável.
-  - Caption/Small: `0.875rem` (14px) ou `0.75rem` (12px).
-- Evitar mais de duas famílias tipográficas por projeto (uma para títulos/display e uma para corpo).
+### 1.2 UX Laws
+- **Fitts's Law**: Critical interactive elements (primary buttons, CTAs) must have adequate size and proximity. Recommended minimum clickable area for touch/desktop is **44x44px**.
+- **Hick's Law**: Minimize simultaneous choices to accelerate user decision-making.
+- **Jakob's Law**: Users expect your system to behave familiarly based on other sites and systems they already use.
 
-### 2.3 Layout, Espaçamento e Bento Grids
-- Sistema de espaçamento com base em múltiplos de 4px ou 8px (`4px, 8px, 12px, 16px, 24px, 32px, 48px, 64px`).
-- Layouts modernos inspirados em **Bento Grid**:
-  - Cartões com raios de borda suaves (`border-radius: 12px` a `16px`).
-  - Bordas subtis de 1px (`border: 1px solid var(--border-color)`).
-  - Sombras suaves com dispersão ampla (`box-shadow: 0 10px 30px -10px rgba(0,0,0,0.3)`).
-- Totalmente responsivo (*Mobile-First*):
-  - Breakpoints padronizados: Mobile (`< 640px`), Tablet (`640px - 1024px`), Desktop (`> 1024px`), Wide (`> 1440px`).
+---
 
-### 2.4 Estados de Componentes e Micro-interações
-Cada componente interativo (botões, inputs, cartões clicáveis, dropdowns) **deve** possuir explicitamente 6 estados implementados:
-1. **Default**: Visual equilibrado e estático.
-2. **Hover**: Elevação sutil, clareamento/escurecimento de 5-10%, ou leve escala (`transform: translateY(-2px)`).
-3. **Active/Pressed**: Efeito tátil de pressão (`transform: scale(0.98)`).
-4. **Focus-Visible**: Anel de foco nítido para acessibilidade (`outline: 2px solid var(--accent); outline-offset: 2px`).
-5. **Disabled**: Opacidade reduzida (0.5), cursor `not-allowed`, sem eventos de ponteiro.
-6. **Loading**: Indicador de progresso inline preservando as dimensões exatas do botão para evitar *layout shift* (CLS).
+## 2. UI Standards (Visual Design and Aesthetics)
 
-### 2.5 Transições e Animações
-- Duração ideal para micro-interações: entre `150ms` e `250ms`.
-- Curva de aceleração: `cubic-bezier(0.4, 0, 0.2, 1)` (ease-out padrão).
-- Respeitar a diretiva de acessibilidade `prefers-reduced-motion`:
+### 2.1 Color Palette and Contrast
+- **Use of raw primary generic colors is prohibited** (such as pure `#FF0000`, pure `#00FF00`, or pure `#0000FF`).
+- Adopt palettes calibrated in HSL/OKLCH with proper contrast:
+  - Minimum contrast ratio of **4.5:1** for regular text and **3:1** for large text/UI components (WCAG 2.1 level AA).
+- **60-30-10 Rule**:
+  - **60%**: Dominant/neutral background color (e.g.: elegant dark surface `#0B0F19` or soft gray `#F8FAFC`).
+  - **30%**: Secondary surface/card color (e.g.: `#111827` or `#FFFFFF` with subtle borders).
+  - **10%**: Accent color for CTAs, active buttons, and key indicators (e.g.: Indigo `#6366F1`, Violet `#8B5CF6`, or Emerald `#10B981`).
+- **Modern Dark Mode**:
+  - Never use absolute black (`#000000`) for main backgrounds; use rich shades like Deep Slate (`#0B0F17` / `#0F172A`).
+  - Elevation layers expressed through subtle lightness increments and 1px semi-transparent borders (`rgba(255, 255, 255, 0.08)`).
+
+### 2.2 Typography
+- Modern, readable typography via Google Fonts (e.g.: **Inter**, **Plus Jakarta Sans**, **Outfit**, **Geist**, or **Fira Code** for code).
+- Strict modular scale:
+  - Display/H1: `2.25rem` to `3rem` (36px to 48px) with `font-weight: 700` or `800`.
+  - H2: `1.75rem` to `2rem` (28px to 32px) with `font-weight: 600`.
+  - H3: `1.25rem` to `1.5rem` (20px to 24px) with `font-weight: 600`.
+  - Body: `1rem` (16px), line-height `1.5` to `1.6` for comfortable reading.
+  - Caption/Small: `0.875rem` (14px) or `0.75rem` (12px).
+- Avoid more than two font families per project (one for headings/display and one for body).
+
+### 2.3 Layout, Spacing, and Bento Grids
+- Spacing system based on multiples of 4px or 8px (`4px, 8px, 12px, 16px, 24px, 32px, 48px, 64px`).
+- Modern layouts inspired by **Bento Grid**:
+  - Cards with smooth border radii (`border-radius: 12px` to `16px`).
+  - Subtle 1px borders (`border: 1px solid var(--border-color)`).
+  - Soft ambient shadows with wide dispersion (`box-shadow: 0 10px 30px -10px rgba(0,0,0,0.3)`).
+- Fully responsive (*Mobile-First*):
+  - Standardized breakpoints: Mobile (`< 640px`), Tablet (`640px - 1024px`), Desktop (`> 1024px`), Wide (`> 1440px`).
+
+### 2.4 Component States and Micro-Interactions
+Every interactive component (buttons, inputs, clickable cards, dropdowns) **must** explicitly implement 6 states:
+1. **Default**: Balanced and static visual appearance.
+2. **Hover**: Subtle elevation, 5-10% lightening/darkening, or slight translate (`transform: translateY(-2px)`).
+3. **Active/Pressed**: Tactile press effect (`transform: scale(0.98)`).
+4. **Focus-Visible**: Crisp focus ring for accessibility (`outline: 2px solid var(--accent); outline-offset: 2px`).
+5. **Disabled**: Reduced opacity (0.5), cursor `not-allowed`, pointer events disabled.
+6. **Loading**: Inline progress indicator preserving exact button dimensions to prevent layout shifts (CLS).
+
+### 2.5 Transitions and Animations
+- Ideal duration for micro-interactions: between `150ms` and `250ms`.
+- Acceleration curve: `cubic-bezier(0.4, 0, 0.2, 1)` (standard ease-out).
+- Respect the `prefers-reduced-motion` accessibility directive:
   ```css
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
@@ -90,11 +90,11 @@ Cada componente interativo (botões, inputs, cartões clicáveis, dropdowns) **d
 
 ---
 
-## 3. Checklist Obrigatório de Validação de UI/UX
-- [ ] O contraste de texto cumpre WCAG AA (mínimo 4.5:1)?
-- [ ] Todos os campos de formulário têm etiquetas (`<label>`) e estados de erro associados via `aria-describedby`?
-- [ ] Todos os botões têm estado de hover, focus e loading?
-- [ ] A página é utilizável apenas com o teclado (Tab, Enter, Space, Escape)?
-- [ ] Existem skeletons ou spinners para qualquer operação assíncrona?
-- [ ] O layout é responsivo sem gerar scroll horizontal indesejado?
-- [ ] Não há textos genéricos como "Erro 500" visíveis ao utilizador final?
+## 3. Mandatory UI/UX Validation Checklist
+- [ ] Does text contrast meet WCAG AA (minimum 4.5:1)?
+- [ ] Do all form fields have labels (`<label>`) and error states tied via `aria-describedby`?
+- [ ] Do all buttons have hover, focus, and loading states?
+- [ ] Is the page fully navigable via keyboard (Tab, Enter, Space, Escape)?
+- [ ] Are skeletons or spinners present for every asynchronous action?
+- [ ] Is the layout responsive without producing horizontal scroll?
+- [ ] Are generic messages such as "Error 500" hidden from end users?

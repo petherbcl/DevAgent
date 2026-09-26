@@ -1,155 +1,155 @@
-# 🤖 Ecossistema Multiagente de Engenharia de Software Full-Stack
+# 🤖 Full-Stack Software Engineering Multi-Agent Ecosystem
 
-Um ecossistema completo de agentes inteligentes e competências (*skills*) desenhado para conduzir o ciclo completo de desenvolvimento de aplicações com **Backend** robusto e **Frontend** de excelência visual (UI/UX).
+A complete ecosystem of intelligent agents and skills designed to lead the end-to-end development cycle of applications with a robust **Backend** and visual excellence (UI/UX) in the **Frontend**.
 
 ---
 
-## 🌟 Visão Geral da Arquitetura Multiagente
+## 🌟 Multi-Agent Architecture Overview
 
-O ecossistema divide as responsabilidades em papéis especializados e complementares, garantindo que nenhuma decisão técnica seja tomada às cegas, a execução seja disciplinada e cada linha de código seja validada contra os padrões mundiais de segurança:
+The ecosystem divides responsibilities into specialized and complementary roles, ensuring that no technical decision is made blindly, execution is disciplined, and every line of code is validated against global security standards:
 
 ```mermaid
 flowchart TD
-    User([👤 Utilizador]) --> Arquiteto[🏛️ Arquiteto de Software]
+    User([👤 User]) --> Arquiteto[🏛️ Software Architect]
     
-    subgraph Fase 1: Descoberta e Arquitetura
-        Arquiteto -- "1. Elicitação: Nunca assume nada, pergunta sempre" --> User
-        Arquiteto -- "2. Envia Briefing de UI/UX" --> WebDesigner[🎨 WebDesigner]
-        WebDesigner -- "3. Design Tokens, Mockups e Protótipos" --> Arquiteto
-        Arquiteto -- "4. Consolida e gera Blueprint (.md)" --> Plan[(📄 Plano Arquitetural .md)]
+    subgraph Phase 1: Discovery and Architecture
+        Arquiteto -- "1. Elicitation: Never assumes anything, always asks" --> User
+        Arquiteto -- "2. Sends UI/UX Briefing" --> WebDesigner[🎨 WebDesigner]
+        WebDesigner -- "3. Design Tokens, Mockups, and Prototypes" --> Arquiteto
+        Arquiteto -- "4. Consolidates and generates Blueprint (.md)" --> Plan[(📄 Architectural Plan .md)]
     end
 
-    subgraph Fase 2: Implementação e Engenharia
-        Plan --> DevJunior[🛠️ Dev Junior]
-        Plan --> DevSenior[🚀 Dev Senior]
+    subgraph Phase 2: Implementation and Engineering
+        Plan --> DevJunior[🛠️ Junior Dev]
+        Plan --> DevSenior[🚀 Senior Dev]
         
-        DevJunior -- "Execução Estrita sem desvios" --> TasksJunior[Tarefas Padrão & CRUD]
-        DevSenior -- "Tarefas Críticas & Otimizações" --> TasksSenior[Auth, Concorrência, Setup]
+        DevJunior -- "Strict execution without deviations" --> TasksJunior[Standard Tasks & CRUD]
+        DevSenior -- "Critical Tasks & Optimizations" --> TasksSenior[Auth, Concurrency, Setup]
         
-        DevJunior -- "⚠️ Bloqueio ou Incerteza" --> EscalationDecision{Decisão do Utilizador}
-        EscalationDecision -- "Opção 1: Escalar para Senior" --> DevSenior
-        EscalationDecision -- "Opção 2: Orientar diretamente" --> User
+        DevJunior -- "⚠️ Blocker or Uncertainty" --> EscalationDecision{User Decision}
+        EscalationDecision -- "Option 1: Escalate to Senior" --> DevSenior
+        EscalationDecision -- "Option 2: Guide directly" --> User
     end
 
-    subgraph Fase 3: Segurança e Quality Gate
-        TasksJunior --> SecurityGate[🛡️ Especialista em Segurança]
+    subgraph Phase 3: Security and Quality Gate
+        TasksJunior --> SecurityGate[🛡️ Security Specialist]
         TasksSenior --> SecurityGate
-        DevSenior -- "Code Review Interno" --> SecurityGate
+        DevSenior -- "Internal Code Review" --> SecurityGate
         
-        SecurityGate -- "Auditoria OWASP / Brechas Detectadas" --> SecPlan[(Plano de Remediação .md)]
-        SecPlan -- "Correções Críticas" --> DevSenior
-        SecPlan -- "Correções Padrão" --> DevJunior
+        SecurityGate -- "OWASP Audit / Vulnerabilities Detected" --> SecPlan[(Remediation Plan .md)]
+        SecPlan -- "Critical Fixes" --> DevSenior
+        SecPlan -- "Standard Fixes" --> DevJunior
     end
 
-    subgraph Fase 4: Entrega Homologada
-        SecurityGate -- "✅ Security Sign-Off Concedido" --> Deliverable([🚀 Aplicação Pronta e Segura para Produção])
+    subgraph Phase 4: Approved Delivery
+        SecurityGate -- "✅ Security Sign-Off Granted" --> Deliverable([🚀 Secure Application Ready for Production])
     end
 ```
 
 ---
 
-## 👥 Os 5 Agentes Especializados
+## 👥 The 5 Specialized Agents
 
-### 1. 🏛️ Arquiteto de Software (`@Arquiteto`)
-- **Papel**: Planeamento transversal da arquitetura, escolha justificada da stack tecnológica, contratos de API e modelos de dados.
-- **Regra de Ouro**: **NUNCA ASSUME NENHUMA INFORMAÇÃO**. Se faltar qualquer requisito funcional ou não-funcional, pergunta sempre ao utilizador antes de decidir.
-- **Frontend & Backend**: Incorpora princípios fundamentais de UI/UX no frontend e padrões de Clean Architecture no backend.
-- **Colaboração**: Convoca o WebDesigner para a criação de mockups visuais antes de redigir o plano de frontend.
-- **Entrega**: Gera o plano no formato `.md` (usando o template em `templates/architecture-plan.template.md`).
-- **Definição Completa**: [.agents/personas/arquiteto.md](file:///.agents/personas/arquiteto.md)
+### 1. 🏛️ Software Architect (`@Arquiteto` / `@Architect`)
+- **Role**: Cross-cutting architecture planning, justified tech stack selection, API contracts, and data models.
+- **Golden Rule**: **NEVER ASSUME ANY INFORMATION**. If any functional or non-functional requirement is missing, always ask the user before deciding.
+- **Frontend & Backend**: Incorporates core UI/UX principles on the frontend and Clean Architecture patterns on the backend.
+- **Collaboration**: Engages the WebDesigner to create visual mockups prior to drafting the frontend plan.
+- **Deliverable**: Generates the plan in `.md` format (using the template in `templates/architecture-plan.template.md`).
+- **Full Definition**: [.agents/personas/arquiteto.md](file:///.agents/personas/arquiteto.md)
 
 ### 2. 🎨 WebDesigner (`@WebDesigner`)
-- **Papel**: Criação de identidades visuais de ponta, design tokens e protótipos de alta fidelidade.
-- **Estética & Tendências**: Aplica tendências visuais contemporâneas (Bento Grids, superfícies táteis, Dark Mode em ardósia/zinc, contrastes vibrantes em indigo/cyan, micro-interações fluidas).
-- **Usabilidade (UX)**: Garante conformidade com Heurísticas de Nielsen, acessibilidade WCAG 2.1 AA (mínimo 4.5:1 de contraste) e alvos de toque >= 44x44px.
-- **Ferramentas**: Prototipagem em HTML/CSS e geração de ativos/mockups com `generate_image`.
-- **Definição Completa**: [.agents/personas/web-designer.md](file:///.agents/personas/web-designer.md)
+- **Role**: Creation of cutting-edge visual identities, design tokens, and high-fidelity prototypes.
+- **Aesthetics & Trends**: Applies contemporary visual trends (Bento Grids, tactile surfaces, Slate/Zinc Dark Mode, vibrant indigo/cyan accents, fluid micro-interactions).
+- **Usability (UX)**: Ensures compliance with Nielsen's Heuristics, WCAG 2.1 AA accessibility (minimum 4.5:1 contrast), and touch targets >= 44x44px.
+- **Tools**: HTML/CSS prototyping and visual asset/mockup generation using `generate_image`.
+- **Full Definition**: [.agents/personas/web-designer.md](file:///.agents/personas/web-designer.md)
 
-### 3. 🛠️ Dev Junior (`@DevJunior`)
-- **Papel**: Implementação sistemática e fiel das tarefas atribuídas no plano `.md` (arquitetural ou de remediação de segurança).
-- **Regra de Ouro**: **ZERO DESVIOS E ZERO INVENÇÕES**. Segue estritamente o plano sem alterar bibliotecas, endpoints, schemas ou tokens visuais.
-- **Protocolo de Bloqueio**: Ao encontrar qualquer erro persistente, incompatibilidade ou ambiguidade que não consiga resolver, **interrompe a tarefa** e pergunta ao utilizador se deseja passar para o **Dev Senior** ou orientar diretamente.
-- **Definição Completa**: [.agents/personas/dev-junior.md](file:///.agents/personas/dev-junior.md)
+### 3. 🛠️ Junior Dev (`@DevJunior`)
+- **Role**: Systematic and faithful implementation of assigned tasks in the `.md` plan (architectural or security remediation).
+- **Golden Rule**: **ZERO DEVIATIONS AND ZERO INVENTIONS**. Strictly follows the plan without changing libraries, endpoints, schemas, or visual tokens.
+- **Blocker Protocol**: When encountering any persistent error, incompatibility, or ambiguity that cannot be resolved, **stops the task** and asks the user whether to escalate to the **Senior Dev** or guide directly.
+- **Full Definition**: [.agents/personas/dev-junior.md](file:///.agents/personas/dev-junior.md)
 
-### 4. 🚀 Dev Senior (`@DevSenior`)
-- **Papel**: Engenharia avançada com décadas de experiência prática.
-- **Autonomia Técnica**: Segue o plano do Arquiteto e as recomendações de segurança, mas tem autonomia para adotar soluções superiores e mais eficientes caso identifique oportunidades de otimização (documentando as razões técnicas).
-- **Mentoria e Resolução**: Assume tarefas complexas (autenticação, concorrência, transações distribuídas, performance de base de dados, remediações críticas de segurança) e desbloqueia o Dev Junior.
-- **Definição Completa**: [.agents/personas/dev-senior.md](file:///.agents/personas/dev-senior.md)
+### 4. 🚀 Senior Dev (`@DevSenior`)
+- **Role**: Advanced engineering with decades of hands-on experience.
+- **Technical Autonomy**: Follows the Architect's plan and security recommendations, but has the autonomy to adopt superior, more efficient solutions when identifying optimization opportunities (documenting the technical rationale).
+- **Mentoring and Resolution**: Takes on complex tasks (authentication, concurrency, distributed transactions, database performance, critical security remediations) and unblocks the Junior Dev.
+- **Full Definition**: [.agents/personas/dev-senior.md](file:///.agents/personas/dev-senior.md)
 
-### 5. 🛡️ Especialista em Segurança (`@Seguranca`)
-- **Papel**: Auditoria contínua de segurança, identificação rigorosa de vulnerabilidades e guardião das normas de **Secure Coding** e **OWASP**.
-- **Security Quality Gate Pós-Desenvolvimento**: Inspeciona o código após cada implementação dos programadores (`Dev Junior` e `Dev Senior`), avaliando falhas de autenticação, injeções, configurações incorretas e controle de acesso.
-- **Plano de Remediação**: Produz um plano detalhado em formato `.md` (usando o template em `templates/security-audit-plan.template.md`) categorizando tarefas por severidade e atribuindo-as a `[Dev Junior]` ou `[Dev Senior]`.
-- **Security Sign-Off**: Emite a aprovação formal apenas quando todas as vulnerabilidades críticas/altas forem sanadas.
-- **Definição Completa**: [.agents/personas/seguranca.md](file:///.agents/personas/seguranca.md)
+### 5. 🛡️ Security Specialist (`@Seguranca` / `@Security`)
+- **Role**: Continuous security auditing, rigorous vulnerability identification, and guardian of **Secure Coding** and **OWASP** standards.
+- **Post-Development Security Quality Gate**: Inspects code after every implementation cycle by developers (`Junior Dev` and `Senior Dev`), evaluating authentication flaws, injections, misconfigurations, and access controls.
+- **Remediation Plan**: Produces a detailed plan in `.md` format (using the template in `templates/security-audit-plan.template.md`), categorizing tasks by severity and assigning them to `[Dev Junior]` or `[Dev Senior]`.
+- **Security Sign-Off**: Issues formal approval only after all critical/high vulnerabilities are resolved.
+- **Full Definition**: [.agents/personas/seguranca.md](file:///.agents/personas/seguranca.md)
 
 ---
 
-## 🧰 Competências Especializadas (*Skills*)
+## 🧰 Specialized Skills
 
-As skills estão localizadas em `.agents/skills/` e são acionadas conforme a necessidade:
+Skills are located in `.agents/skills/` and are triggered as needed:
 
-| Skill | Localização | Finalidade |
+| Skill | Location | Purpose |
 | :--- | :--- | :--- |
-| **`architect-planner`** | [.agents/skills/architect-planner/SKILL.md](file:///.agents/skills/architect-planner/SKILL.md) | Elicitação de requisitos sem suposições, análise de trade-offs de stack e geração de blueprints `.md`. |
-| **`webdesigner-uiux`** | [.agents/skills/webdesigner-uiux/SKILL.md](file:///.agents/skills/webdesigner-uiux/SKILL.md) | Criação de Design Tokens CSS, layouts Bento Grid, protótipos interativos e auditoria de acessibilidade WCAG. |
-| **`junior-developer`** | [.agents/skills/junior-developer/SKILL.md](file:///.agents/skills/junior-developer/SKILL.md) | Execução disciplinada de tickets, validação pré-conclusão e emissão do protocolo de escalação. |
-| **`senior-developer`** | [.agents/skills/senior-developer/SKILL.md](file:///.agents/skills/senior-developer/SKILL.md) | Otimização arquitetural, resolução de causas raiz de bloqueios, refatoração limpa e profiling. |
-| **`security-specialist`** | [.agents/skills/security-specialist/SKILL.md](file:///.agents/skills/security-specialist/SKILL.md) | Auditoria de segurança de código, mapeamento OWASP/Secure Coding, criação de planos de remediação e Security Gate pós-desenvolvimento. |
-| **`fullstack-standards`** | [.agents/skills/fullstack-standards/SKILL.md](file:///.agents/skills/fullstack-standards/SKILL.md) | Modelos canónicos de envelopes de resposta de API, validação Zod, repositórios e componentes tipados. |
+| **`architect-planner`** | [.agents/skills/architect-planner/SKILL.md](file:///.agents/skills/architect-planner/SKILL.md) | Requirement elicitation without assumptions, stack tradeoff analysis, and `.md` blueprint generation. |
+| **`webdesigner-uiux`** | [.agents/skills/webdesigner-uiux/SKILL.md](file:///.agents/skills/webdesigner-uiux/SKILL.md) | Creation of CSS Design Tokens, Bento Grid layouts, interactive prototypes, and WCAG accessibility auditing. |
+| **`junior-developer`** | [.agents/skills/junior-developer/SKILL.md](file:///.agents/skills/junior-developer/SKILL.md) | Disciplined ticket execution, pre-completion validation, and escalation protocol issuance. |
+| **`senior-developer`** | [.agents/skills/senior-developer/SKILL.md](file:///.agents/skills/senior-developer/SKILL.md) | Architectural optimization, root-cause resolution of blockers, clean refactoring, and profiling. |
+| **`security-specialist`** | [.agents/skills/security-specialist/SKILL.md](file:///.agents/skills/security-specialist/SKILL.md) | Source code security audit, OWASP/Secure Coding mapping, remediation plan generation, and post-development Security Gate. |
+| **`fullstack-standards`** | [.agents/skills/fullstack-standards/SKILL.md](file:///.agents/skills/fullstack-standards/SKILL.md) | Canonical API response envelope templates, Zod validation, repositories, and typed components. |
 
 ---
 
-## 📜 Regras de Boas Práticas (Injetadas Automaticamente)
+## 📜 Best Practice Rules (Automatically Injected)
 
-Todos os agentes respeitam as regras centralizadas em `.agents/rules/`:
+All agents adhere to centralized rules in `.agents/rules/`:
 1. 🎨 **[ui-ux-best-practices.md](file:///.agents/rules/ui-ux-best-practices.md)**:
-   - Heurísticas de Usabilidade (Nielsen Norman).
-   - Paleta 60-30-10, Dark Mode sem preto puro (`#000000`), micro-interações (150-250ms).
-   - Especificação dos 6 estados obrigatórios de componentes (Default, Hover, Active, Focus, Disabled, Loading).
+   - Usability Heuristics (Nielsen Norman).
+   - 60-30-10 palette, Dark Mode without pure black (`#000000`), micro-interactions (150-250ms).
+   - Specification of the 6 mandatory component states (Default, Hover, Active, Focus, Disabled, Loading).
 2. ⚙️ **[fullstack-engineering-standards.md](file:///.agents/rules/fullstack-engineering-standards.md)**:
-   - Arquitetura em Camadas (Controller -> Service -> Repository -> Entity).
-   - APIs RESTful com status HTTP semânticos e envelope `{ success, data, meta }` / `{ success, error }`.
-   - Sanitização de dados, integridade referencial e transações atómicas.
+   - Layered Architecture (Controller -> Service -> Repository -> Entity).
+   - RESTful APIs with semantic HTTP statuses and `{ success, data, meta }` / `{ success, error }` envelopes.
+   - Data sanitization, referential integrity, and atomic transactions.
 3. 🛡️ **[secure-coding-and-owasp.md](file:///.agents/rules/secure-coding-and-owasp.md)**:
-   - Padrões OWASP Top 10 e API Security Top 10.
-   - Hashing com Argon2id/bcrypt, cookies HttpOnly/Secure/SameSite, tokens com rotação.
-   - Headers Helmet, proteção anti-CSRF, CORS restritivo e prevenção de SSRF/IDOR/BOLA.
+   - OWASP Top 10 and API Security Top 10 standards.
+   - Hashing with Argon2id/bcrypt, HttpOnly/Secure/SameSite cookies, rotating tokens.
+   - Helmet headers, anti-CSRF protection, restrictive CORS, and SSRF/IDOR/BOLA prevention.
 4. 🧹 **[clean-code-and-architecture.md](file:///.agents/rules/clean-code-and-architecture.md)**:
-   - Nomenclatura reveladora, funções pequenas com responsabilidade única.
-   - Princípios SOLID, KISS, DRY e YAGNI.
-   - Tipagem estrita em TypeScript (sem `any`).
+   - Intention-revealing naming, small single-responsibility functions.
+   - SOLID, KISS, DRY, and YAGNI principles.
+   - Strict TypeScript typing (no `any`).
 5. 🤝 **[agent-collaboration-protocol.md](file:///.agents/rules/agent-collaboration-protocol.md)**:
-   - Fluxos de comunicação, handoff formal entre os 5 agentes e protocolo de Security Gate.
+   - Communication workflows, formal handoff across the 5 agents, and Security Gate protocol.
 
 ---
 
-## 📁 Modelos e Templates Disponíveis (`templates/`)
+## 📁 Available Models and Templates (`templates/`)
 
-- [architecture-plan.template.md](file:///templates/architecture-plan.template.md): O blueprint que o Arquiteto preenche e entrega.
-- [security-audit-plan.template.md](file:///templates/security-audit-plan.template.md): O plano de auditoria e remediação gerado pelo Especialista em Segurança.
-- [escalation-ticket.template.md](file:///templates/escalation-ticket.template.md): O formato que o Dev Junior usa ao encontrar um bloqueio.
-- [design-tokens.template.css](file:///templates/design-tokens.template.css): A folha de estilos inicial com variáveis CSS modernas.
-- [design-brief.template.md](file:///templates/design-brief.template.md): O briefing do Arquiteto para o WebDesigner.
+- [architecture-plan.template.md](file:///templates/architecture-plan.template.md): The blueprint that the Architect fills and delivers.
+- [security-audit-plan.template.md](file:///templates/security-audit-plan.template.md): The audit and remediation plan generated by the Security Specialist.
+- [escalation-ticket.template.md](file:///templates/escalation-ticket.template.md): The format used by the Junior Dev when encountering a blocker.
+- [design-tokens.template.css](file:///templates/design-tokens.template.css): The initial stylesheet with modern CSS variables.
+- [design-brief.template.md](file:///templates/design-brief.template.md): The Architect's briefing to the WebDesigner.
 
 ---
 
-## 🚀 Como Iniciar um Projeto com este Ecossistema
+## 🚀 How to Start a Project with this Ecosystem
 
-1. **Ativar o Arquiteto**:
-   > *"@Arquiteto, quero construir uma aplicação para [descrever ideia de negócio]."*
-2. **Responder às Perguntas de Alinhamento**:
-   - O Arquiteto **não começará a codificar** de imediato. Ele apresentará perguntas estruturadas sobre stack, escala, autenticação e preferências.
-3. **Criação de Mockups**:
-   - O Arquiteto convocará o **@WebDesigner** para gerar os tokens de design e os mockups de UI.
-4. **Geração do Plano**:
-   - O Arquiteto produzirá o ficheiro `plan.md` com a divisão explícita de tarefas `[Dev Junior]` e `[Dev Senior]`.
-5. **Desenvolvimento Iterativo**:
-   - O **Dev Senior** estabelece os alicerces e sistemas de autenticação.
-   - O **Dev Junior** executa os CRUDs e componentes visuais.
-   - Se o Dev Junior bloquear, ele perguntará se quer escalar para o Senior ou orientar diretamente.
-6. **Avaliação Contínua de Segurança (`@Seguranca`)**:
-   - Após cada ciclo de desenvolvimento dos programadores, o **Especialista em Segurança** audita o código contra normas OWASP e Secure Coding.
-   - Se encontrar brechas, gera o `security-plan.md` com tarefas prioritárias para os desenvolvedores.
-   - Quando o código estiver 100% seguro, emite o **Security Sign-Off** para homologação e entrega.
+1. **Activate the Architect**:
+   > *"@Arquiteto, I want to build an application for [describe business idea]."*
+2. **Answer Alignment Questions**:
+   - The Architect **will not start coding** right away. They will present structured questions regarding stack, scale, authentication, and preferences.
+3. **Mockup Creation**:
+   - The Architect will summon the **@WebDesigner** to generate design tokens and UI mockups.
+4. **Plan Generation**:
+   - The Architect will produce the `plan.md` file with explicit task distribution between `[Dev Junior]` and `[Dev Senior]`.
+5. **Iterative Development**:
+   - The **Senior Dev** establishes foundations and authentication systems.
+   - The **Junior Dev** executes CRUDs and visual components.
+   - If the Junior Dev gets blocked, they will ask whether to escalate to the Senior Dev or guide directly.
+6. **Continuous Security Evaluation (`@Seguranca`)**:
+   - After each developer development cycle, the **Security Specialist** audits code against OWASP and Secure Coding standards.
+   - If gaps are found, they generate `security-plan.md` with prioritized tasks for developers.
+   - When the code is 100% secure, they issue the **Security Sign-Off** for acceptance and delivery.

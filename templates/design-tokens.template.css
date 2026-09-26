@@ -1,41 +1,41 @@
 /* ==========================================================================
-   Design Tokens Universais - Padrão Moderno UI/UX
-   Criado pelo WebDesigner para consumo por Dev Junior e Dev Senior
+   Universal Design Tokens - Modern UI/UX Standard
+   Created by WebDesigner for consumption by Junior Dev and Senior Dev
    ========================================================================== */
 
 :root {
-  /* --- 1. SUPERFÍCIES E FUNDOS (Dark Mode Calibrado) --- */
-  --color-bg-base: #0B0F19;         /* Fundo global - ardósia profunda */
-  --color-bg-surface: #111827;      /* Superfície de cartões e painéis */
-  --color-bg-surface-hover: #1F2937;/* Hover em cartões interativos */
-  --color-bg-glass: rgba(17, 24, 39, 0.7); /* Efeito vidro fosco */
+  /* --- 1. SURFACES AND BACKGROUNDS (Calibrated Dark Mode) --- */
+  --color-bg-base: #0B0F19;         /* Global background - deep slate */
+  --color-bg-surface: #111827;      /* Surface for cards and panels */
+  --color-bg-surface-hover: #1F2937;/* Hover on interactive cards */
+  --color-bg-glass: rgba(17, 24, 39, 0.7); /* Frosted glass effect */
   --backdrop-blur: blur(12px);
 
-  /* --- 2. ACENTOS E GRADIENTES VIBRANTES --- */
-  --color-accent-primary: #6366F1;       /* Indigo Moderno */
-  --color-accent-primary-hover: #4F46E5; /* Indigo Escuro (Hover) */
+  /* --- 2. VIBRANT ACCENTS AND GRADIENTS --- */
+  --color-accent-primary: #6366F1;       /* Modern Indigo */
+  --color-accent-primary-hover: #4F46E5; /* Dark Indigo (Hover) */
   --color-accent-primary-active: #4338CA;
-  --color-accent-secondary: #06B6D4;     /* Cyan Elétrico */
+  --color-accent-secondary: #06B6D4;     /* Electric Cyan */
   --color-accent-gradient: linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #EC4899 100%);
 
-  /* --- 3. ESTADOS DE SISTEMA (SEM CORES BRUTAS) --- */
-  --color-success: #10B981;        /* Esmeralda */
+  /* --- 3. SYSTEM STATES (NO RAW COLORS) --- */
+  --color-success: #10B981;        /* Emerald */
   --color-success-bg: rgba(16, 185, 129, 0.12);
-  --color-warning: #F59E0B;        /* Âmbar */
+  --color-warning: #F59E0B;        /* Amber */
   --color-warning-bg: rgba(245, 158, 11, 0.12);
-  --color-danger: #EF4444;         /* Rubi suave */
+  --color-danger: #EF4444;         /* Soft Ruby */
   --color-danger-bg: rgba(239, 68, 68, 0.12);
-  --color-info: #3B82F6;           /* Azul Royal */
+  --color-info: #3B82F6;           /* Royal Blue */
 
-  /* --- 4. TIPOGRAFIA & CONTRASTE WCAG 2.1 AA --- */
-  --color-text-primary: #F9FAFB;   /* Quase branco (98% brilho) */
-  --color-text-secondary: #9CA3AF; /* Cinza legível (contraste 5.2:1) */
-  --color-text-muted: #6B7280;     /* Texto de suporte e legendas */
+  /* --- 4. TYPOGRAPHY & WCAG 2.1 AA CONTRAST --- */
+  --color-text-primary: #F9FAFB;   /* Near white (98% lightness) */
+  --color-text-secondary: #9CA3AF; /* Readable gray (5.2:1 contrast) */
+  --color-text-muted: #6B7280;     /* Supporting text and captions */
   --font-family-display: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   --font-family-body: 'Inter', system-ui, -apple-system, sans-serif;
   --font-family-mono: 'Fira Code', monospace;
 
-  /* Escala Modular */
+  /* Modular Scale */
   --font-size-xs: 0.75rem;    /* 12px */
   --font-size-sm: 0.875rem;   /* 14px */
   --font-size-md: 1rem;       /* 16px - Base */
@@ -45,7 +45,7 @@
   --font-size-3xl: 2rem;      /* 32px */
   --font-size-display: 2.75rem;/* 44px */
 
-  /* --- 5. BORDAS, SOMBRAS E ELEVAÇÕES --- */
+  /* --- 5. BORDERS, SHADOWS, AND ELEVATIONS --- */
   --border-width: 1px;
   --border-subtle: rgba(255, 255, 255, 0.08);
   --border-accent: rgba(99, 102, 241, 0.4);
@@ -60,7 +60,7 @@
   --shadow-lg: 0 12px 28px -6px rgba(0, 0, 0, 0.45);
   --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.3);
 
-  /* --- 6. TRANSIÇÕES E TEMPOS --- */
+  /* --- 6. TRANSITIONS AND TIMINGS --- */
   --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
   --duration-fast: 150ms;

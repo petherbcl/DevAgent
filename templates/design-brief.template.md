@@ -1,31 +1,31 @@
-# 🎨 Briefing de Design UI/UX (Arquiteto -> WebDesigner)
+# 🎨 UI/UX Design Briefing (Architect -> WebDesigner)
 
-> **De**: 🏛️ Arquiteto de Software  
-> **Para**: 🎨 WebDesigner  
-> **Data**: YYYY-MM-DD  
-> **Projeto**: [Nome do Projeto]
-
----
-
-## 1. Contexto do Produto e Utilizador
-- **Objetivo da Aplicação**: [Ex: Plataforma de gestão financeira pessoal com relatórios visuais]
-- **Perfil do Utilizador**: [Ex: Jovens profissionais que valorizam agilidade e visual moderno]
-- **Sensação Visual Desejada**: [Ex: Premium, minimalista, confiável, alta densidade de informação limpa]
+> **From**: 🏛️ Software Architect  
+> **To**: 🎨 WebDesigner  
+> **Date**: YYYY-MM-DD  
+> **Project**: [Project Name]
 
 ---
 
-## 2. Ecrãs / Componentes Solicitados
-1. **Ecrã Principal / Dashboard**:
-   - Layout pretendido: Bento Grid com métricas chave, gráfico de tendência e tabela de transações recentes.
-2. **Formulário de Ação Crítica**:
-   - Campos necessários, validações e estado de feedback.
-3. **Menu de Navegação & Acesso Rápido**:
-   - Sidebar retrátil ou barra superior com busca global (`Cmd+K`).
+## 1. Product and User Context
+- **Application Objective**: [e.g.: Personal financial management platform with visual reports]
+- **User Profile**: [e.g.: Young professionals who value agility and a modern aesthetic]
+- **Desired Visual Feel**: [e.g.: Premium, minimalist, trustworthy, high density of clean information]
 
 ---
 
-## 3. Entregas Esperadas do WebDesigner
-- [ ] Ficheiro de Design Tokens CSS (`design-tokens.css`) com paleta, contrastes e tipografia.
-- [ ] Mockup estrutural ou protótipo interativo em HTML/CSS.
-- [ ] Mockup visual de alto impacto (usando `generate_image` se necessário).
-- [ ] Especificação dos 6 estados de interação (Default, Hover, Active, Focus, Disabled, Loading).
+## 2. Requested Screens / Components
+1. **Main Screen / Dashboard**:
+   - Intended layout: Bento Grid with key metrics, trend chart, and recent transactions table.
+2. **Critical Action Form**:
+   - Required fields, validations, and feedback state.
+3. **Navigation Menu & Quick Access**:
+   - Retractable sidebar or top bar with global search (`Cmd+K`).
+
+---
+
+## 3. Expected WebDesigner Deliverables
+- [ ] CSS Design Tokens file (`design-tokens.css`) with palette, contrast ratios, and typography.
+- [ ] Structural mockup or interactive HTML/CSS prototype.
+- [ ] High-impact visual mockup (using `generate_image` if necessary).
+- [ ] Specification of the 6 interaction states (Default, Hover, Active, Focus, Disabled, Loading).

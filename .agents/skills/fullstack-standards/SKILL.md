@@ -6,15 +6,15 @@ description: >-
   and robust error handling in backend and frontend code.
 ---
 
-# Skill: Padrões Técnicos e Estruturais Full-Stack
+# Skill: Technical and Structural Full-Stack Standards
 
-Esta skill reúne modelos de código e padrões canónicos de implementação para garantir consistência entre todos os agentes.
+This skill gathers code blueprints and canonical implementation patterns to ensure consistency across all agents.
 
 ---
 
-## 1. Padrão Canónico de Backend (TypeScript / Node)
+## 1. Canonical Backend Pattern (TypeScript / Node)
 
-### 1.1 Envelope Padronizado de Respostas da API
+### 1.1 Standardized API Response Envelope
 ```typescript
 // types/api-response.ts
 export interface ApiSuccessResponse<T> {
@@ -38,25 +38,25 @@ export interface ApiErrorResponse {
 }
 ```
 
-### 1.2 Validação de Entrada Estrita com Schemas (Zod)
+### 1.2 Strict Input Validation with Schemas (Zod)
 ```typescript
 // schemas/user.schema.ts
 import { z } from 'zod';
 
 export const CreateUserSchema = z.object({
-  name: z.string().min(2, 'O nome deve ter pelo menos 2 caracteres.').max(100),
-  email: z.string().email('E-mail em formato inválido.'),
+  name: z.string().min(2, 'Name must have at least 2 characters.').max(100),
+  email: z.string().email('Invalid email format.'),
   password: z
     .string()
-    .min(8, 'A senha deve ter no mínimo 8 caracteres.')
-    .regex(/[A-Z]/, 'A senha deve conter pelo menos uma letra maiúscula.')
-    .regex(/[0-9]/, 'A senha deve conter pelo menos um número.')
+    .min(8, 'Password must have at least 8 characters.')
+    .regex(/[A-Z]/, 'Password must contain at least one uppercase letter.')
+    .regex(/[0-9]/, 'Password must contain at least one number.')
 });
 
 export type CreateUserInput = z.infer<typeof CreateUserSchema>;
 ```
 
-### 1.3 Camada de Serviço e Repositório (Exemplo de Separação Limpa)
+### 1.3 Service and Repository Layer (Clean Separation Example)
 ```typescript
 // services/user.service.ts
 export class UserService {
@@ -65,7 +65,7 @@ export class UserService {
   async registerUser(input: CreateUserInput): Promise<UserOutput> {
     const existing = await this.userRepository.findByEmail(input.email);
     if (existing) {
-      throw new ConflictError('Este e-mail já se encontra registado.');
+      throw new ConflictError('This email is already registered.');
     }
 
     const hashedPassword = await this.hasher.hash(input.password);
@@ -81,7 +81,7 @@ export class UserService {
 
 ---
 
-## 2. Padrão Canónico de Frontend (Componente Moderno com Tratamento de Estados)
+## 2. Canonical Frontend Pattern (Modern Component with State Handling)
 
 ```tsx
 // components/features/UserRegistrationCard.tsx
@@ -97,10 +97,10 @@ export const UserRegistrationCard: React.FC = () => {
     setErrorMessage(null);
 
     try {
-      // Chamada de API tipada
+      // Typed API call
       // ...
     } catch (err: any) {
-      setErrorMessage(err.message || 'Ocorreu um erro inesperado ao registar.');
+      setErrorMessage(err.message || 'An unexpected error occurred during registration.');
     } finally {
       setLoading(false);
     }
@@ -108,7 +108,7 @@ export const UserRegistrationCard: React.FC = () => {
 
   return (
     <div className="card bento-surface">
-      <h2 className="title-display">Criar Conta</h2>
+      <h2 className="title-display">Create Account</h2>
       
       {errorMessage && (
         <div role="alert" className="alert-error">
@@ -117,13 +117,13 @@ export const UserRegistrationCard: React.FC = () => {
       )}
 
       <form onSubmit={handleSubmit} className="form-stack">
-        <label htmlFor="email" className="input-label">E-mail Profissional</label>
+        <label htmlFor="email" className="input-label">Work Email</label>
         <input 
           id="email" 
           type="email" 
           required 
           className="input-field" 
-          placeholder="exemplo@empresa.com"
+          placeholder="user@company.com"
         />
 
         <button 
@@ -131,7 +131,7 @@ export const UserRegistrationCard: React.FC = () => {
           disabled={loading} 
           className="btn-primary"
         >
-          {loading ? <span className="spinner-inline" /> : 'Registar'}
+          {loading ? <span className="spinner-inline" /> : 'Register'}
         </button>
       </form>
     </div>

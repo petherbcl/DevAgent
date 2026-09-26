@@ -1,113 +1,113 @@
-# Diretrizes de Codificação Segura (Secure Coding) e Padrões OWASP
+# Secure Coding Guidelines and OWASP Standards
 
-Este manual define as normas obrigatórias de segurança aplicáveis a todas as fases do ciclo de desenvolvimento no ecossistema (Arquitetura, Implementação, Revisão e Auditoria). É referenciado continuamente pelo **Especialista em Segurança (`@Seguranca`)**, pelo **Dev Senior** e pelo **Dev Junior**.
-
----
-
-## 1. Princípios Fundamentais de Engenharia Segura
-
-1. **Defesa em Profundidade (Defense in Depth)**: Múltiplas camadas de controles de segurança sobrepostas. A falha de um controle não deve comprometer a totalidade do sistema.
-2. **Princípio do Menor Privilégio (Least Privilege)**: Cada processo, utilizador, conexão com banco de dados e serviço externo deve operar com o nível estritamente mínimo de permissões necessárias.
-3. **Falha Segura (Fail-Safe Defaults)**: Em caso de erro ou exceção, o sistema deve recusar o acesso e manter o estado mais restritivo possível.
-4. **Validação Positiva (Allowlisting over Blocklisting)**: Definir o que é explicitamente aceito (tipos, tamanhos, formatos regex) em vez de tentar bloquear padrões maliciosos conhecidos.
+This manual defines mandatory security standards applicable to all phases of the development cycle across the ecosystem (Architecture, Implementation, Review, and Audit). It is continuously referenced by the **Security Specialist (`@Seguranca` / `@Security`)**, **Senior Dev**, and **Junior Dev**.
 
 ---
 
-## 2. Padrões OWASP Top 10 e Implementação Prática
+## 1. Fundamental Principles of Secure Engineering
 
-### 2.1 A01: Broken Access Control (Controle de Acesso Quebrado)
-- **Autorização em Nível de Objeto (BOLA / IDOR)**:
-  - Nunca confie em identificadores fornecidos pelo cliente (`/api/v1/documents/:id`) sem validar se o utilizador autenticado é o legítimo proprietário ou possui permissão de leitura/escrita sobre aquele recurso específico.
-- **Autorização Centralizada**:
-  - Implementar verificação de permissões (RBAC/ABAC) através de middlewares desacoplados ou políticas declarativas antes da execução do Use Case.
-- **Bloqueio de Navegação Direta**:
-  - Diretórios internos e rotas administrativas devem ser inacessíveis sem autenticação e papel autorizado.
+1. **Defense in Depth**: Multiple layered security controls. The failure of one control must not compromise the entire system.
+2. **Principle of Least Privilege**: Every process, user, database connection, and external service must operate with the strictly minimum permissions required.
+3. **Fail-Safe Defaults**: In case of error or exception, the system must deny access and maintain the most restrictive state possible.
+4. **Positive Validation (Allowlisting over Blocklisting)**: Explicitly define what is acceptable (types, sizes, regex formats) rather than attempting to filter known malicious patterns.
 
-### 2.2 A02: Cryptographic Failures (Falhas Criptográficas)
-- **Dados em Trânsito**:
-  - Todo o tráfego HTTP deve utilizar HTTPS forçado via cabeçalho `Strict-Transport-Security` (HSTS).
-- **Dados em Repouso**:
-  - Senhas de utilizadores devem ser transformadas em hashes utilizando exclusivamente **Argon2id** (mínimo: memória 64MB, iterações 3, paralelismo 1) ou **bcrypt** (fator de custo >= 12). Proibido o uso de MD5, SHA-1 ou SHA-256 simples para senhas.
-  - Dados altamente sensíveis (números de cartão de crédito, tokens de integração, documentos fiscais) devem ser cifrados com algoritmos modernos como **AES-256-GCM** ou **ChaCha20-Poly1305**.
-- **Gestão de Segredos**:
-  - Segredos (chaves privadas, senhas de DB, API keys) **nunca** devem constar no código-fonte, em comentários ou em imagens de containers. Devem ser injetados exclusivamente via variáveis de ambiente seguras (`.env` fora do repositório) ou gerenciadores de segredos (Vault, AWS Secrets Manager).
+---
 
-### 2.3 A03: Injection (Injeção de Código e Dados)
-- **Injeção de SQL/NoSQL**:
-  - Todas as consultas à base de dados devem ser parametrizadas (Prepared Statements) ou manipuladas através de ORMs seguros (Prisma, Drizzle, SQLAlchemy).
-  - É expressamente proibida a concatenação ou interpolação de strings em consultas:
+## 2. OWASP Top 10 Standards and Practical Implementation
+
+### 2.1 A01: Broken Access Control
+- **Object-Level Authorization (BOLA / IDOR)**:
+  - Never trust client-provided identifiers (`/api/v1/documents/:id`) without validating that the authenticated user is the legitimate owner or has read/write permissions for that specific resource.
+- **Centralized Authorization**:
+  - Implement permission checks (RBAC/ABAC) via decoupled middlewares or declarative policies prior to Use Case execution.
+- **Direct Navigation Prevention**:
+  - Internal directories and administrative routes must be inaccessible without proper authentication and role authorization.
+
+### 2.2 A02: Cryptographic Failures
+- **Data in Transit**:
+  - All HTTP traffic must enforce HTTPS via the `Strict-Transport-Security` (HSTS) header.
+- **Data at Rest**:
+  - User passwords must be hashed exclusively using **Argon2id** (minimum: 64MB memory, 3 iterations, 1 parallelism) or **bcrypt** (cost factor >= 12). The use of MD5, SHA-1, or simple SHA-256 for passwords is prohibited.
+  - Highly sensitive data (credit card numbers, integration tokens, tax documents) must be encrypted using modern algorithms such as **AES-256-GCM** or **ChaCha20-Poly1305**.
+- **Secrets Management**:
+  - Secrets (private keys, DB credentials, API keys) must **never** be stored in source code, comments, or container images. They must be injected exclusively via secure environment variables (`.env` outside repository) or secrets managers (Vault, AWS Secrets Manager).
+
+### 2.3 A03: Injection (Code and Data Injection)
+- **SQL/NoSQL Injection**:
+  - All database queries must be parameterized (Prepared Statements) or handled through secure ORMs (Prisma, Drizzle, SQLAlchemy).
+  - String concatenation or interpolation in queries is strictly prohibited:
     ```typescript
-    // ❌ VULNERÁVEL:
+    // ❌ VULNERABLE:
     db.query(`SELECT * FROM users WHERE email = '${email}'`);
 
-    // ✅ SEGURO:
+    // ✅ SECURE:
     db.query("SELECT * FROM users WHERE email = $1", [email]);
     ```
-- **Injeção de Comandos do Sistema Operacional**:
-  - Evitar chamadas diretas a shells (`exec`, `system`). Se inevitável, utilizar APIs que recebam arrays de argumentos sem execução de shell (`spawn` sem `shell: true`).
+- **Operating System Command Injection**:
+  - Avoid direct shell calls (`exec`, `system`). If unavoidable, use APIs that take argument arrays without shell execution (`spawn` without `shell: true`).
 
-### 2.4 A04: Insecure Design (Design Inseguro)
-- Implementar **Threat Modeling** na fase de arquitetura com o Arquiteto e o Especialista em Segurança.
-- Estabelecer limites de taxa de chamadas (**Rate Limiting**) para mitigar ataques de força bruta e enumeração.
+### 2.4 A04: Insecure Design
+- Implement **Threat Modeling** during the architecture phase with the Architect and Security Specialist.
+- Establish request rate limits (**Rate Limiting**) to mitigate brute-force and enumeration attacks.
 
-### 2.5 A05: Security Misconfiguration (Configuração Incorreta de Segurança)
-- **Cabeçalhos de Segurança HTTP (Helmet / Configuração de Servidor)**:
-  - `Content-Security-Policy (CSP)`: Restringir origens de scripts, estilos e mídias.
-  - `X-Content-Type-Options: nosniff`: Evitar MIME-sniffing.
-  - `X-Frame-Options: DENY` ou `SAMEORIGIN`: Prevenir Clickjacking.
+### 2.5 A05: Security Misconfiguration
+- **HTTP Security Headers (Helmet / Server Configuration)**:
+  - `Content-Security-Policy (CSP)`: Restrict origins for scripts, styles, and media.
+  - `X-Content-Type-Options: nosniff`: Prevent MIME-type sniffing.
+  - `X-Frame-Options: DENY` or `SAMEORIGIN`: Prevent Clickjacking.
   - `Referrer-Policy: strict-origin-when-cross-origin`.
-- **CORS Estrito**:
-  - Definir origens permitidas explícitas. Nunca permitir `Access-Control-Allow-Origin: *` em endpoints que utilizem credenciais ou cookies.
-- **Tratamento Seguro de Erros**:
-  - Em ambientes de produção, desativar mensagens de depuração detalhadas e stack traces (`NODE_ENV=production`).
+- **Strict CORS**:
+  - Explicitly define allowed origins. Never allow `Access-Control-Allow-Origin: *` on endpoints using credentials or cookies.
+- **Secure Error Handling**:
+  - In production environments, disable verbose debug messages and stack traces (`NODE_ENV=production`).
 
-### 2.6 A06: Vulnerable and Outdated Components (Componentes Desatualizados)
-- Auditoria de dependências automática em pipelines: executar `npm audit`, `pip-audit` ou `cargo audit` periodicamente.
-- Não introduzir pacotes sem histórico mantido ou com vulnerabilidades críticas abertas.
+### 2.6 A06: Vulnerable and Outdated Components
+- Automatic dependency audits in pipelines: run `npm audit`, `pip-audit`, or `cargo audit` regularly.
+- Do not introduce unmaintained packages or libraries with open critical vulnerabilities.
 
-### 2.7 A07: Identification and Authentication Failures (Falhas de Autenticação)
-- **Política de Senhas**: Exigir no mínimo 10 caracteres, com complexidade razoável e verificação de senhas comuns vazadas.
-- **Gestão de Sessão**:
-  - Tokens JWT de curta duração (10 a 15 minutos).
-  - Refresh Tokens com rotação automática em cada uso e revogação em banco.
-  - Cookies com atributos obrigatórios: `HttpOnly`, `Secure`, `SameSite=Strict` ou `Lax`.
-- **Prevenção de Ataques de Força Bruta**:
-  - Rate limiting específico em `/login`, `/register`, `/reset-password` (ex: máximo 5 tentativas por IP/conta a cada 15 minutos).
+### 2.7 A07: Identification and Authentication Failures
+- **Password Policy**: Require a minimum of 10 characters, reasonable complexity, and checks against common leaked passwords.
+- **Session Management**:
+  - Short-lived JWT tokens (10 to 15 minutes).
+  - Refresh tokens with automatic rotation on each use and database revocation.
+  - Cookies with mandatory attributes: `HttpOnly`, `Secure`, `SameSite=Strict` or `Lax`.
+- **Brute Force Protection**:
+  - Specific rate limiting on `/login`, `/register`, `/reset-password` (e.g.: maximum 5 attempts per IP/account every 15 minutes).
 
-### 2.8 A08: Software and Data Integrity Failures (Falhas de Integridade)
-- Não desserializar dados arbitrários e não confiáveis sem validação de tipo.
-- Assinatura criptográfica de webhooks e pacotes externos.
+### 2.8 A08: Software and Data Integrity Failures
+- Do not deserialize untrusted arbitrary data without type validation.
+- Cryptographically verify signatures on webhooks and external packages.
 
-### 2.9 A09: Security Logging and Monitoring Failures (Falhas de Log e Monitorização)
-- Registar eventos de segurança chave: logins com falha, bloqueios de conta, alterações de permissão, acessos negados e transações financeiras.
-- **Mascaramento Obrigatório (Data Masking)**:
-  - Nunca registar senhas, tokens de autorização, dados de cartão ou PII (dados pessoais sensíveis) nos logs do sistema.
+### 2.9 A09: Security Logging and Monitoring Failures
+- Log key security events: failed logins, account lockouts, privilege changes, denied access, and financial transactions.
+- **Mandatory Data Masking**:
+  - Never log passwords, authorization tokens, payment details, or PII (personally identifiable information) in system logs.
 
 ### 2.10 A10: Server-Side Request Forgery (SSRF)
-- Qualquer chamada HTTP de saída originada por parâmetros do utilizador deve validar a URL de destino contra uma allowlist de domínios seguros.
-- Bloquear resoluções para endereços IP locais ou privados (ex: `127.0.0.1`, `localhost`, `10.0.0.0/8`, `169.254.169.254`).
+- Any outbound HTTP request derived from user input must validate the target URL against an allowlist of safe domains.
+- Block DNS resolutions pointing to private or local IP ranges (e.g.: `127.0.0.1`, `localhost`, `10.0.0.0/8`, `169.254.169.254`).
 
 ---
 
-## 3. Padrões OWASP API Security Top 10
+## 3. OWASP API Security Top 10 Standards
 
-1. **BOLA (Broken Object Level Authorization)**: Validar ownership em cada endpoint (`/users/:userId/orders/:orderId`).
-2. **Broken Authentication**: Proteger rotas de renovação de token e APIs internas.
-3. **BOPLA (Mass Assignment & Excessive Data Exposure)**: Usar DTOs e Schemas estritos para filtrar o que o cliente pode enviar e o que o servidor devolve (nunca devolver o objeto de banco de dados cru com senhas ou hashes).
-4. **Unrestricted Resource Consumption**: Paginação obrigatória com tamanho máximo fixo (`limit <= 100`) e rate limit de rede.
-5. **Broken Function Level Authorization**: Não depender da interface do usuário para ocultar botões ou rotas de admin; o endpoint deve rejeitar chamadas de papéis inferiores com `403 Forbidden`.
+1. **BOLA (Broken Object Level Authorization)**: Validate ownership on every endpoint (`/users/:userId/orders/:orderId`).
+2. **Broken Authentication**: Protect token refresh routes and internal APIs.
+3. **BOPLA (Mass Assignment & Excessive Data Exposure)**: Use strict DTOs and Schemas to filter what clients can submit and what the server returns (never return raw database objects with passwords or hashes).
+4. **Unrestricted Resource Consumption**: Mandatory pagination with a fixed maximum size (`limit <= 100`) and network rate limiting.
+5. **Broken Function Level Authorization**: Do not rely on UI logic to hide buttons or admin routes; the endpoint must reject lower-role requests with `403 Forbidden`.
 
 ---
 
-## 4. Checklist do Security Quality Gate (Pós-Desenvolvimento)
+## 4. Post-Development Security Quality Gate Checklist
 
-Antes de aprovar qualquer entrega de código dos agentes de programação:
+Before approving any code delivery by programming agents:
 
-- [ ] **Validação de Entrada**: Todos os endpoints possuem schemas Zod/Pydantic aplicados a `body`, `query` e `params`?
-- [ ] **Controle de Acesso**: Foi verificado se o utilizador tem autorização sobre o recurso específico manipulado?
-- [ ] **Sanitização de Saída**: O frontend e o backend escapam saídas para prevenir XSS?
-- [ ] **Criptografia & Segredos**: Não há chaves ou credenciais gravadas no código? Senhas utilizam Argon2id/bcrypt?
-- [ ] **Segurança de APIs**: Os DTOs previnem atribuição em massa (*Mass Assignment*) e exposição excessiva de dados?
-- [ ] **Headers & CORS**: A aplicação configura cabeçalhos seguros e CORS explícito?
-- [ ] **Logs**: Os logs omitem senhas, tokens e dados sensíveis?
-- [ ] **Tratamento de Erros**: As mensagens de erro em produção são genéricas e não revelam segredos internos?
+- [ ] **Input Validation**: Do all endpoints apply Zod/Pydantic schemas to `body`, `query`, and `params`?
+- [ ] **Access Control**: Was authorization verified for the specific manipulated resource?
+- [ ] **Output Sanitization**: Do frontend and backend escape outputs to prevent XSS?
+- [ ] **Cryptography & Secrets**: Are keys and credentials excluded from source code? Do passwords use Argon2id/bcrypt?
+- [ ] **API Security**: Do DTOs prevent Mass Assignment and excessive data exposure?
+- [ ] **Headers & CORS**: Does the application configure secure headers and explicit CORS?
+- [ ] **Logs**: Do logs omit passwords, tokens, and sensitive data?
+- [ ] **Error Handling**: Are production error messages generic without revealing internal implementation details?

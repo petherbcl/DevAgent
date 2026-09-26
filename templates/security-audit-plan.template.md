@@ -1,82 +1,82 @@
-# Relatório de Auditoria e Plano de Remediação de Segurança
+# Security Audit Report and Remediation Plan
 
-> **Auditor Responsável**: 🛡️ Especialista em Segurança (`@Seguranca`)  
-> **Data da Auditoria**: YYYY-MM-DD  
-> **Status**: [🔴 Bloqueado - Vulnerabilidades Críticas / 🟡 Pendente de Correções / 🟢 Aprovado (Security Sign-Off)]  
-> **Escopo da Análise**: [Ex: Módulo de Autenticação, Endpoints da API v1, Nova funcionalidade de upload]  
-> **Referenciais Utilizados**: OWASP Top 10, OWASP API Security Top 10, OWASP ASVS v4.0, Secure Coding Standards
-
----
-
-## 1. Sumário Executivo de Segurança
-
-- **Nível Geral de Risco**: [Crítico / Alto / Médio / Baixo]
-- **Total de Vulnerabilidades Identificadas**: [X]
-  - 🚨 **Críticas**: [X]
-  - ⚠️ **Altas**: [X]
-  - 🟡 **Médias**: [X]
-  - ℹ️ **Baixas / Informativas**: [X]
-- **Parecer do Especialista**: [Resumo conciso sobre a maturidade da segurança no escopo analisado e se o código está apto para avançar para testes/produção]
+> **Lead Auditor**: 🛡️ Security Specialist (`@Seguranca` / `@Security`)  
+> **Audit Date**: YYYY-MM-DD  
+> **Status**: [🔴 Blocked - Critical Vulnerabilities / 🟡 Pending Fixes / 🟢 Approved (Security Sign-Off)]  
+> **Scope of Analysis**: [e.g.: Authentication Module, API v1 Endpoints, New upload feature]  
+> **Frameworks Used**: OWASP Top 10, OWASP API Security Top 10, OWASP ASVS v4.0, Secure Coding Standards
 
 ---
 
-## 2. Matriz de Vulnerabilidades Encontradas
+## 1. Executive Security Summary
 
-| ID | Vulnerabilidade / Vetor OWASP | Severidade | Ficheiro(s) Afectado(s) | Agente Atribuído | Status |
+- **Overall Risk Level**: [Critical / High / Medium / Low]
+- **Total Vulnerabilities Identified**: [X]
+  - 🚨 **Critical**: [X]
+  - ⚠️ **High**: [X]
+  - 🟡 **Medium**: [X]
+  - ℹ️ **Low / Informational**: [X]
+- **Specialist Evaluation**: [Concise summary on security maturity in the analyzed scope and whether code is ready to proceed to testing/production]
+
+---
+
+## 2. Identified Vulnerabilities Matrix
+
+| ID | Vulnerability / OWASP Vector | Severity | Affected File(s) | Assigned Agent | Status |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **SEC-01** | [Ex: A01 - BOLA: Ausência de validação de ownership] | Crítica | `src/api/orders.controller.ts` | `[Dev Senior]` | Aberto |
-| **SEC-02** | [Ex: A03 - SQL Injection em query de pesquisa] | Alta | `src/repositories/search.repository.ts` | `[Dev Senior]` | Aberto |
-| **SEC-03** | [Ex: A05 - Falta de cabeçalhos de segurança Helmet] | Média | `src/server.ts` | `[Dev Junior]` | Aberto |
-| **SEC-04** | [Ex: A07 - Falta de validação de tamanho mínimo de senha] | Baixa | `src/schemas/auth.schema.ts` | `[Dev Junior]` | Aberto |
+| **SEC-01** | [e.g.: A01 - BOLA: Missing ownership validation] | Critical | `src/api/orders.controller.ts` | `[Dev Senior]` | Open |
+| **SEC-02** | [e.g.: A03 - SQL Injection in search query] | High | `src/repositories/search.repository.ts` | `[Dev Senior]` | Open |
+| **SEC-03** | [e.g.: A05 - Missing Helmet security headers] | Medium | `src/server.ts` | `[Dev Junior]` | Open |
+| **SEC-04** | [e.g.: A07 - Missing minimum password length validation] | Low | `src/schemas/auth.schema.ts` | `[Dev Junior]` | Open |
 
 ---
 
-## 3. Detalhamento Técnico das Vulnerabilidades e Planos de Correção
+## 3. Technical Breakdown of Vulnerabilities and Remediation Plans
 
-### SEC-01: [Nome da Vulnerabilidade]
-- **Severidade**: [Crítica / Alta / Média / Baixa]
-- **Classificação OWASP / CWE**: [Ex: OWASP A01:2021 - Broken Access Control / CWE-639]
-- **Ficheiro(s) e Linha(s)**: `caminho/do/ficheiro.ts:L45-L52`
-- **Descrição do Risco & Vetor de Ataque**:
-  - [Explicação clara de como um atacante pode explorar esta brecha e qual o impacto no negócio]
-- **Código Atual Vulnerável**:
+### SEC-01: [Vulnerability Name]
+- **Severity**: [Critical / High / Medium / Low]
+- **OWASP / CWE Classification**: [e.g.: OWASP A01:2021 - Broken Access Control / CWE-639]
+- **File(s) and Line(s)**: `path/to/file.ts:L45-L52`
+- **Risk Description & Attack Vector**:
+  - [Clear explanation of how an attacker can exploit this vulnerability and its business impact]
+- **Current Vulnerable Code**:
   ```typescript
-  // Exemplo do trecho com falha
+  // Example of vulnerable snippet
   ```
-- **Remediação Obrigatória (Secure Coding Pattern)**:
+- **Mandatory Remediation (Secure Coding Pattern)**:
   ```typescript
-  // Exemplo da solução segura esperada
+  // Example of expected secure solution
   ```
-- **Critérios de Aceitação para Aprovação**:
-  - [ ] Implementar a validação sugerida.
-  - [ ] Adicionar teste automatizado cobrindo tentativa de exploração (retornando 403 Forbidden).
+- **Acceptance Criteria for Approval**:
+  - [ ] Implement recommended validation.
+  - [ ] Add automated test covering exploit attempt (returning 403 Forbidden).
 
 ---
 
-## 4. Plano de Tarefas de Remediação para os Desenvolvedores
+## 4. Remediation Task Plan for Developers
 
-### 4.1 Tarefas Estruturais e Críticas `[Dev Senior]`
-- [ ] **TASK-SEC-01 [Dev Senior]**: [Título da Tarefa de Segurança]
-  - *Ficheiros*: `src/...`
-  - *Descrição*: [Instruções detalhadas de engenharia segura e mitigação de risco]
-  - *Critério de Aceitação*: [Comportamento seguro estrito e testes de regressão]
+### 4.1 Structural and Critical Tasks `[Dev Senior]`
+- [ ] **TASK-SEC-01 [Dev Senior]**: [Security Task Title]
+  - *Files*: `src/...`
+  - *Description*: [Detailed secure engineering instructions and risk mitigation]
+  - *Acceptance Criteria*: [Strict secure behavior and regression tests]
 
-### 4.2 Tarefas Padrão e de Configuração `[Dev Junior]`
-- [ ] **TASK-SEC-02 [Dev Junior]**: [Título da Tarefa de Segurança]
-  - *Ficheiros*: `src/...`
-  - *Descrição*: [Instruções diretas e passo a passo seguindo a especificação]
-  - *Critério de Aceitação*: [Implementação sem alteração de escopo, conforme a regra de ouro]
+### 4.2 Standard and Configuration Tasks `[Dev Junior]`
+- [ ] **TASK-SEC-02 [Dev Junior]**: [Security Task Title]
+  - *Files*: `src/...`
+  - *Description*: [Direct step-by-step instructions following specification]
+  - *Acceptance Criteria*: [Implementation without scope changes, in accordance with the golden rule]
 
 ---
 
-## 5. Security Quality Gate: Registo de Reavaliação Pós-Desenvolvimento
+## 5. Security Quality Gate: Post-Development Reassessment Record
 
-> Preenchido pelo `@Seguranca` após os desenvolvedores concluírem as tarefas de remediação.
+> Filled by `@Seguranca` / `@Security` after developers complete remediation tasks.
 
-- [ ] **Reavaliação de Código (Code Diff Review)**: O código foi verificado contra as vulnerabilidades SEC-XX?
-- [ ] **Verificação de Regressões de Segurança**: Novas brechas foram introduzidas durante a correção?
-- [ ] **Testes de Segurança Executados**: Os testes cobrindo os cenários de ataque foram executados e passaram?
+- [ ] **Code Reassessment (Code Diff Review)**: Was code verified against SEC-XX vulnerabilities?
+- [ ] **Security Regressions Verification**: Were new vulnerabilities introduced during the fix?
+- [ ] **Security Tests Executed**: Were tests covering attack scenarios executed and passed?
 
-### Parecer Final de Aprovação:
-- **Decisão**: [APROVADO (Security Sign-Off Concedido) / REPROVADO (Retornar com novos apontamentos)]
-- **Assinatura**: 🛡️ Especialista em Segurança (`@Seguranca`) - Data: YYYY-MM-DD
+### Final Approval Decision:
+- **Decision**: [APPROVED (Security Sign-Off Granted) / REJECTED (Return with new findings)]
+- **Signature**: 🛡️ Security Specialist (`@Seguranca` / `@Security`) - Date: YYYY-MM-DD

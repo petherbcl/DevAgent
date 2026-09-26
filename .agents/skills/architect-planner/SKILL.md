@@ -7,58 +7,58 @@ description: >-
   and generate an actionable architecture plan in markdown (.md).
 ---
 
-# Skill: Planeamento Arquitetural e Geração de Blueprints (.md)
+# Skill: Architectural Planning and Blueprint Generation (.md)
 
-Esta skill guia o **Arquiteto** no processo de desenho transversal do projeto, garantindo conformidade com normas de UI/UX no frontend e boas práticas no backend.
+This skill guides the **Architect** in cross-cutting project design, ensuring frontend UI/UX standard compliance and backend best practices.
 
 ---
 
-## 1. Regra Fundamental: Elicitação Sem Suposições
+## 1. Core Rule: Elicitation Without Assumptions
 
-Antes de desenhar qualquer solução, execute a entrevista de alinhamento com o utilizador:
+Before designing any solution, conduct the alignment interview with the user:
 
-### Checklist de Elicitação Obrigatória
-- [ ] **Escopo & Casos de Uso**: Quais são os fluxos de trabalho principais?
-- [ ] **Stack Tecnológica**: Há preferência de linguagem/framework ou restrições de hosting?
-- [ ] **Modelo de Dados**: Que entidades principais existem e que volume é esperado?
-- [ ] **Autenticação & Segurança**: É necessário JWT, sessões, OAuth ou RBAC?
-- [ ] **Interface & Design**: O projeto possui frontend web/mobile? Requer mockups do WebDesigner?
+### Mandatory Elicitation Checklist
+- [ ] **Scope & Use Cases**: What are the primary workflows?
+- [ ] **Tech Stack**: Are there language/framework preferences or hosting constraints?
+- [ ] **Data Model**: What core entities exist and what volume is expected?
+- [ ] **Authentication & Security**: Is JWT, session-based auth, OAuth, or RBAC required?
+- [ ] **Interface & Design**: Does the project have a web/mobile frontend? Does it require mockups from WebDesigner?
 
 > [!CAUTION]
-> Se qualquer um dos pontos acima não foi explicitado pelo utilizador, **NÃO ADIVINHE**. Formule perguntas diretas e aguarde a resposta antes de finalizar o plano.
+> If any of the above points were not made explicit by the user, **DO NOT GUESS**. Ask direct questions and await the response before finalizing the plan.
 
 ---
 
-## 2. Coordenação com o WebDesigner
+## 2. Coordination with WebDesigner
 
-Para projetos com interface gráfica:
-1. Solicite ao **WebDesigner** a criação da paleta de cores (Design Tokens em CSS) e o mockup dos ecrãs principais.
-2. Integre os tokens CSS e a estrutura de layout fornecida pelo WebDesigner na secção de Frontend do plano.
-3. Garanta que os princípios de UX (Heurísticas de Nielsen, estados de loading, feedback de erro) estão presentes nos critérios de aceitação de cada ecrã.
-
----
-
-## 3. Estruturação do Plano Arquitetural (`plan.md`)
-
-O plano final deve ser gravado em `docs/architecture-plan.md` ou na raiz como `plan.md` seguindo o template:
-- Consulte o template oficial em: [architecture-plan.template.md](../../templates/architecture-plan.template.md)
-
-### Divisão Obrigatória de Tarefas:
-- Tarefas atribuídas a `[Dev Junior]`:
-  - Criação de modelos de dados e migrações padrão.
-  - CRUDs básicos de backend seguindo a arquitetura em camadas definida.
-  - Componentes de UI estáticos e páginas que consomem APIs prontas.
-  - Implementação de estilos com base nos tokens já criados.
-- Tarefas atribuídas a `[Dev Senior]`:
-  - Setup inicial da arquitetura base e injeção de dependências.
-  - Sistema central de autenticação, rotação de tokens e middlewares de segurança.
-  - Algoritmos complexos, concorrência, transações financeiras e queries de alta performance.
-  - Revisão de código e resolução de bloqueios escalados pelo Dev Junior.
+For projects with a graphical user interface:
+1. Request the **WebDesigner** to create the color palette (CSS Design Tokens) and mockups of primary screens.
+2. Integrate CSS tokens and layout structure provided by WebDesigner into the Frontend section of the plan.
+3. Ensure UX principles (Nielsen's Heuristics, loading states, error feedback) are present in the acceptance criteria of each screen.
 
 ---
 
-## 4. Validação Prévia do Plano
-Antes de entregar o plano ao utilizador e aos desenvolvedores, confirme:
-1. Todas as rotas de API possuem métodos HTTP semânticos e formato de payload definido?
-2. A separação em camadas (Controller -> Service -> Repository) está explícita?
-3. Todos os critérios de aceitação são verificáveis e testáveis?
+## 3. Structuring the Architecture Plan (`plan.md`)
+
+The final plan must be saved in `docs/architecture-plan.md` or at the root as `plan.md` following the template:
+- Consult the official template at: [architecture-plan.template.md](../../templates/architecture-plan.template.md)
+
+### Mandatory Task Breakdown:
+- Tasks assigned to `[Dev Junior]`:
+  - Data model creation and standard migrations.
+  - Basic backend CRUD following defined layered architecture.
+  - Static UI components and pages consuming ready APIs.
+  - Style implementation based on created tokens.
+- Tasks assigned to `[Dev Senior]`:
+  - Initial setup of base architecture and dependency injection.
+  - Core authentication system, token rotation, and security middlewares.
+  - Complex algorithms, concurrency, financial transactions, and high-performance queries.
+  - Code review and resolution of blockers escalated by Junior Dev.
+
+---
+
+## 4. Prior Plan Validation
+Before handing over the plan to the user and developers, confirm:
+1. Do all API routes feature semantic HTTP methods and defined payload formats?
+2. Is the layered separation (Controller -> Service -> Repository) explicit?
+3. Are all acceptance criteria verifiable and testable?

@@ -1,39 +1,39 @@
-# ⚠️ Ticket de Escalação de Bloqueio Técnico (Dev Junior)
+# ⚠️ Technical Blocker Escalation Ticket (Junior Dev)
 
-> **Emitido por**: 🛠️ Dev Junior  
-> **Data**: YYYY-MM-DD HH:mm  
-> **Status**: [Aguardando Decisão do Utilizador]
-
----
-
-## 1. Identificação da Tarefa
-- **ID da Tarefa**: [Ex: TASK-05]
-- **Título**: [Ex: Implementar CRUD de Posts com validação Zod]
-- **Ficheiro(s) Alvo**: `[Ex: src/api/controllers/posts.controller.ts]`
+> **Issued by**: 🛠️ Junior Dev  
+> **Date**: YYYY-MM-DD HH:mm  
+> **Status**: [Awaiting User Decision]
 
 ---
 
-## 2. Descrição Objetiva do Bloqueio
-- **O que foi tentado**: [Descrição passo a passo das ações realizadas de acordo com o plano]
-- **Onde ocorreu a falha**: [Compilação, incompatibilidade de dependências, erro de runtime, omissão no plano]
-- **Comportamento Observado vs Esperado**:
-  - *Esperado*: [O que o plano previa acontecer]
-  - *Observado*: [O que efetivamente aconteceu]
+## 1. Task Identification
+- **Task ID**: [e.g.: TASK-05]
+- **Title**: [e.g.: Implement Posts CRUD with Zod validation]
+- **Target File(s)**: `[e.g.: src/api/controllers/posts.controller.ts]`
 
 ---
 
-## 3. Logs de Erro / Evidências Técnicas
+## 2. Objective Blocker Description
+- **What was attempted**: [Step-by-step description of actions taken according to the plan]
+- **Where the failure occurred**: [Compilation, dependency incompatibility, runtime error, omission in the plan]
+- **Observed vs Expected Behavior**:
+  - *Expected*: [What the plan anticipated would happen]
+  - *Observed*: [What actually happened]
+
+---
+
+## 3. Error Logs / Technical Evidence
 ```text
-[Inserir aqui o log de erro, stack trace ou mensagem do compilador]
+[Insert error log, stack trace, or compiler message here]
 ```
 
 ---
 
-## 4. Pergunta de Decisão ao Utilizador
+## 4. Decision Question for the User
 
-Prezado utilizador, esta dificuldade técnica ultrapassa os limites da execução direta do plano sem improvisação.
+Dear user, this technical difficulty exceeds the limits of direct plan execution without improvisation.
 
-**Como deseja proceder?**
+**How would you like to proceed?**
 
-1. 🚀 **Encaminhar para o Dev Senior**: O Dev Senior assumirá a tarefa, identificará a causa raiz, refatorará e aplicará a solução ótima.
-2. 💡 **Orientar Diretamente**: Fornecer instruções explícitas de como deseja que eu (Dev Junior) resolva este ponto específico.
+1. 🚀 **Escalate to Senior Dev**: The Senior Dev will take over the task, identify the root cause, refactor, and apply the optimal solution.
+2. 💡 **Guide Directly**: Provide explicit instructions on how you want me (Junior Dev) to resolve this specific issue.

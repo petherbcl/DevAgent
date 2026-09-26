@@ -1,38 +1,38 @@
-# Plano de Arquitetura e Engenharia: [Nome do Projeto]
+# Architecture and Engineering Plan: [Project Name]
 
-> **Autor**: 🏛️ Arquiteto de Software  
-> **Data de Criação**: YYYY-MM-DD  
-> **Status**: [Proposta / Em Revisão / Aprovado para Desenvolvimento]  
-> **Colaboradores**: 🎨 WebDesigner, 🛠️ Dev Junior, 🚀 Dev Senior, 🛡️ Especialista em Segurança
-
----
-
-## 1. Visão Geral e Objetivos do Sistema
-- **Objetivo Central**: [Descrição concisa do problema de negócio e valor entregue]
-- **Público-Alvo**: [Perfil dos utilizadores e contexto de uso]
-- **Requisitos Não-Funcionais Chave**:
-  - Disponibilidade / Resiliência: [Ex: 99.9%, failover suave]
-  - Desempenho / Latência: [Ex: APIs < 150ms, Core Web Vitals verdes]
-  - Escalabilidade: [Ex: 10k utilizadores concorrentes, stateless workers]
+> **Author**: 🏛️ Software Architect  
+> **Creation Date**: YYYY-MM-DD  
+> **Status**: [Proposal / Under Review / Approved for Development]  
+> **Collaborators**: 🎨 WebDesigner, 🛠️ Junior Dev, 🚀 Senior Dev, 🛡️ Security Specialist
 
 ---
 
-## 2. Stack Tecnológica Selecionada e Justificativa
+## 1. System Overview and Objectives
+- **Core Objective**: [Concise description of the business problem and delivered value]
+- **Target Audience**: [User profile and usage context]
+- **Key Non-Functional Requirements**:
+  - Availability / Resilience: [e.g., 99.9%, smooth failover]
+  - Performance / Latency: [e.g., APIs < 150ms, green Core Web Vitals]
+  - Scalability: [e.g., 10k concurrent users, stateless workers]
 
-| Camada | Tecnologia Escolhida | Versão | Justificativa Técnica & Trade-offs |
+---
+
+## 2. Selected Tech Stack and Rationale
+
+| Layer | Chosen Technology | Version | Technical Rationale & Trade-offs |
 | :--- | :--- | :--- | :--- |
-| **Frontend** | [Ex: React / Next.js / Vite] | [v...] | [Motivo da escolha frente a alternativas] |
-| **Estilização & UI** | [Ex: Vanilla CSS com Tokens / Tailwind] | [v...] | [Alinhamento com identidade moderna e velocidade] |
-| **Backend** | [Ex: Node.js / Express / Fastify / NestJS / FastAPI] | [v...] | [Eficiência I/O, maturidade e tipagem estrita] |
-| **Base de Dados** | [Ex: PostgreSQL / SQLite / MongoDB] | [v...] | [Consistência ACID, suporte a JSONB, migrações] |
-| **Cache / Mensageria**| [Ex: Redis / In-memory] | [v...] | [Otimização de sessões e rate limiting] |
-| **Autenticação** | [Ex: JWT com Refresh Tokens em HttpOnly Cookie] | - | [Segurança contra XSS e CSRF] |
+| **Frontend** | [e.g.: React / Next.js / Vite] | [v...] | [Reason for choice over alternatives] |
+| **Styling & UI** | [e.g.: Vanilla CSS with Tokens / Tailwind] | [v...] | [Alignment with modern identity and speed] |
+| **Backend** | [e.g.: Node.js / Express / Fastify / NestJS / FastAPI] | [v...] | [I/O efficiency, maturity, and strict typing] |
+| **Database** | [e.g.: PostgreSQL / SQLite / MongoDB] | [v...] | [ACID consistency, JSONB support, migrations] |
+| **Cache / Messaging** | [e.g.: Redis / In-memory] | [v...] | [Session optimization and rate limiting] |
+| **Authentication** | [e.g.: JWT with Refresh Tokens in HttpOnly Cookie] | - | [Security against XSS and CSRF] |
 
 ---
 
-## 3. Arquitetura de Dados e Modelagem de Entidades
+## 3. Data Architecture and Entity Modeling
 
-### 3.1 Diagrama Entidade-Relacionamento (Mermaid)
+### 3.1 Entity-Relationship Diagram (Mermaid)
 ```mermaid
 erDiagram
     USER ||--o{ POST : creates
@@ -53,81 +53,81 @@ erDiagram
     }
 ```
 
-### 3.2 Migrações e Índices Planeados
-- `users`: Índice único em `email`, índice em `created_at`.
-- `posts`: Índice composto `(user_id, status)`, índice de pesquisa textual.
+### 3.2 Planned Migrations and Indexes
+- `users`: Unique index on `email`, index on `created_at`.
+- `posts`: Composite index `(user_id, status)`, full-text search index.
 
 ---
 
-## 4. Contratos de API RESTful (Endpoints)
+## 4. RESTful API Contracts (Endpoints)
 
-Envelope Padronizado:
-- Sucesso: `{ success: true, data: ..., meta?: ... }`
-- Erro: `{ success: false, error: { code, message, details? } }`
+Standardized Envelope:
+- Success: `{ success: true, data: ..., meta?: ... }`
+- Error: `{ success: false, error: { code, message, details? } }`
 
-| Método | Endpoint | Papel Mínimo | Payload Request | Resposta Sucesso (Status) | Erros Mapeados |
+| Method | Endpoint | Minimum Role | Request Payload | Success Response (Status) | Mapped Errors |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `POST` | `/api/v1/auth/register` | Público | `{ email, password, name }` | `201 Created` | `400, 409` |
-| `POST` | `/api/v1/auth/login` | Público | `{ email, password }` | `200 OK` (Set-Cookie) | `400, 401` |
-| `GET` | `/api/v1/posts` | Autenticado | Query: `page, limit, search` | `200 OK` + Meta | `401` |
+| `POST` | `/api/v1/auth/register` | Public | `{ email, password, name }` | `201 Created` | `400, 409` |
+| `POST` | `/api/v1/auth/login` | Public | `{ email, password }` | `200 OK` (Set-Cookie) | `400, 401` |
+| `GET` | `/api/v1/posts` | Authenticated | Query: `page, limit, search` | `200 OK` + Meta | `401` |
 
 ---
 
-## 5. Diretrizes de Frontend, UI e UX (Aprovadas com WebDesigner)
+## 5. Frontend, UI, and UX Guidelines (Approved with WebDesigner)
 
-### 5.1 Identidade Visual e Design Tokens
-- Ficheiro base: `src/styles/design-tokens.css`
-- Paleta Principal:
-  - Fundo Primário: `var(--bg-primary)` (#0B0F19)
-  - Superfície de Cartões: `var(--bg-surface)` (#111827)
-  - Acento: `var(--accent-primary)` (#6366F1)
-- Tipografia: `Plus Jakarta Sans` ou `Inter` via Google Fonts.
+### 5.1 Visual Identity and Design Tokens
+- Base file: `src/styles/design-tokens.css`
+- Primary Palette:
+  - Primary Background: `var(--bg-primary)` (#0B0F19)
+  - Card Surface: `var(--bg-surface)` (#111827)
+  - Accent: `var(--accent-primary)` (#6366F1)
+- Typography: `Plus Jakarta Sans` or `Inter` via Google Fonts.
 
-### 5.2 Heurísticas e Estados Obrigatórios
-- Todos os formulários possuem validação inline e estados explícitos: `Default`, `Hover`, `Focus-visible`, `Loading`, `Error`.
-- Skeletons com shimmer ativados para carregamento de tabelas e listas.
-- Acessibilidade: Contraste mínimo 4.5:1 (WCAG AA), foco navegável por teclado.
+### 5.2 Mandatory Heuristics and States
+- All forms feature inline validation and explicit states: `Default`, `Hover`, `Focus-visible`, `Loading`, `Error`.
+- Shimmer skeletons enabled for table and list loading.
+- Accessibility: Minimum 4.5:1 contrast (WCAG AA), keyboard navigable focus.
 
 ---
 
-## 6. Plano de Tarefas e Divisão de Responsabilidades
+## 6. Task Plan and Responsibility Breakdown
 
-### Fase 1: Fundação e Setup do Projeto
-- [ ] **TASK-01 [Dev Senior]**: Inicialização do repositório, configuração de TypeScript estrito, linter, Docker/banco e estrutura de pastas (Clean Architecture).
-  - *Ficheiros*: `package.json`, `tsconfig.json`, `.env.example`, `src/config/`.
-  - *Critério de Aceitação*: Servidor inicializa e responde a `GET /health` com status 200.
+### Phase 1: Foundation and Project Setup
+- [ ] **TASK-01 [Dev Senior]**: Repository initialization, strict TypeScript configuration, linter, Docker/database, and folder structure (Clean Architecture).
+  - *Files*: `package.json`, `tsconfig.json`, `.env.example`, `src/config/`.
+  - *Acceptance Criteria*: Server starts and responds to `GET /health` with status 200.
 
-### Fase 2: Identidade Visual e Design Tokens
-- [ ] **TASK-02 [WebDesigner]**: Criação da folha de tokens CSS, tipografia e mockup funcional dos ecrãs principais.
-  - *Ficheiros*: `src/styles/design-tokens.css`, `mockups/dashboard.html`.
-  - *Critério de Aceitação*: Tokens integrados e validados contra contraste WCAG AA.
+### Phase 2: Visual Identity and Design Tokens
+- [ ] **TASK-02 [WebDesigner]**: Creation of CSS tokens stylesheet, typography, and functional mockup of main screens.
+  - *Files*: `src/styles/design-tokens.css`, `mockups/dashboard.html`.
+  - *Acceptance Criteria*: Tokens integrated and validated against WCAG AA contrast.
 
-### Fase 3: Camada de Dados e Modelos
-- [ ] **TASK-03 [Dev Junior]**: Criação dos esquemas de migração da base de dados e entidades de domínio.
-  - *Ficheiros*: `src/infrastructure/database/migrations/`, `src/domain/entities/`.
-  - *Critério de Aceitação*: Migrações executam com sucesso (`up` e `down`) sem erros.
+### Phase 3: Data Layer and Models
+- [ ] **TASK-03 [Dev Junior]**: Creation of database migration schemas and domain entities.
+  - *Files*: `src/infrastructure/database/migrations/`, `src/domain/entities/`.
+  - *Acceptance Criteria*: Migrations execute successfully (`up` and `down`) without errors.
 
-### Fase 4: Autenticação e Segurança Nuclear
-- [ ] **TASK-04 [Dev Senior]**: Implementação do serviço de hash de senha (Argon2id), emissão e rotação de JWT, middleware de autenticação e proteção contra rate-limiting.
-  - *Ficheiros*: `src/services/auth.service.ts`, `src/middlewares/auth.middleware.ts`.
-  - *Critério de Aceitação*: Testes de autenticação aprovados com cobertura > 90%.
+### Phase 4: Authentication and Core Security
+- [ ] **TASK-04 [Dev Senior]**: Implementation of password hashing service (Argon2id), JWT issuance and rotation, authentication middleware, and rate-limiting protection.
+  - *Files*: `src/services/auth.service.ts`, `src/middlewares/auth.middleware.ts`.
+  - *Acceptance Criteria*: Authentication tests pass with coverage > 90%.
 
-### Fase 5: Funcionalidades Padrão (CRUD)
-- [ ] **TASK-05 [Dev Junior]**: Implementação dos Controllers, Schemas Zod e Repositórios para os recursos padrão.
-  - *Ficheiros*: `src/api/controllers/`, `src/schemas/`, `src/repositories/`.
-  - *Critério de Aceitação*: Endpoints respondem rigorosamente de acordo com os contratos da secção 4.
+### Phase 5: Standard Features (CRUD)
+- [ ] **TASK-05 [Dev Junior]**: Implementation of Controllers, Zod Schemas, and Repositories for standard resources.
+  - *Files*: `src/api/controllers/`, `src/schemas/`, `src/repositories/`.
+  - *Acceptance Criteria*: Endpoints strictly respond according to the contracts in section 4.
 
-### Fase 6: Frontend e Integração
-- [ ] **TASK-06 [Dev Junior]**: Construção dos componentes de UI e telas consumindo as APIs com TanStack Query / Fetch.
-  - *Ficheiros*: `src/components/`, `src/pages/`.
-  - *Critério de Aceitação*: Interface responsiva, estados de loading com skeletons e tratamento de erro visível.
+### Phase 6: Frontend and Integration
+- [ ] **TASK-06 [Dev Junior]**: Construction of UI components and screens consuming APIs with TanStack Query / Fetch.
+  - *Files*: `src/components/`, `src/pages/`.
+  - *Acceptance Criteria*: Responsive interface, loading states with skeletons, and visible error handling.
 
-### Fase 7: Revisão, Otimização e Validação Final
-- [ ] **TASK-07 [Dev Senior]**: Code review transversal, otimização de queries, refatoração de performance e testes de carga.
-  - *Ficheiros*: Todo o projeto.
-  - *Critério de Aceitação*: Core Web Vitals aprovados e integridade funcional verificada.
+### Phase 7: Review, Optimization, and Final Validation
+- [ ] **TASK-07 [Dev Senior]**: Cross-cutting code review, query optimization, performance refactoring, and load tests.
+  - *Files*: Entire project.
+  - *Acceptance Criteria*: Core Web Vitals approved and functional integrity verified.
 
-### Fase 8: Security Quality Gate & Auditoria OWASP
-- [ ] **TASK-08 [Segurança]**: Auditoria estática e dinâmica de código contra OWASP Top 10 e Secure Coding. Geração do plano de remediação `security-plan.md` se existirem vulnerabilidades, ou emissão do Security Sign-Off final.
-  - *Ficheiros*: Todo o repositório (`src/`, `.env.example`, dependências).
-  - *Critério de Aceitação*: Zero vulnerabilidades críticas ou altas pendentes; emissão do relatório com parecer "APROVADO".
+### Phase 8: Security Quality Gate & OWASP Audit
+- [ ] **TASK-08 [Security / Segurança]**: Static and dynamic code audit against OWASP Top 10 and Secure Coding. Generation of `security-plan.md` remediation plan if vulnerabilities exist, or issuance of final Security Sign-Off.
+  - *Files*: Entire repository (`src/`, `.env.example`, dependencies).
+  - *Acceptance Criteria*: Zero critical or high vulnerabilities pending; report issuance with "APPROVED" evaluation.
