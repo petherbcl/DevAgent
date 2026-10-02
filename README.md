@@ -182,7 +182,7 @@ This ecosystem is ready for out-of-the-box use across the major AI coding enviro
 | Platform / Tool | Native Config File | How to Use |
 |---|---|---|
 | **Cursor** | [.cursorrules](file:///.cursorrules) | Tag `@Architect`, `@WebDesigner`, `@TicketPlanner`, `@DevJunior`, `@DevSenior`, `@Security` in Chat, Composer, or Agent mode. |
-| **Claude / Claude Code** | [CLAUDE.md](file:///CLAUDE.md) | Automatically loaded by Claude Code CLI and Claude Projects. Mention desired role in prompts. |
+| **Claude / Claude Code** | [CLAUDE.md](file:///CLAUDE.md), [.claude/agents/](file:///.claude/agents/) | `CLAUDE.md` is loaded automatically. The six roles are registered as native subagents (`architect`, `web-designer`, `ticket-planner`, `dev-junior`, `dev-senior`, `security-specialist`): Claude delegates automatically by task, or you can call one explicitly (`@agent-architect`, or "use the dev-junior agent"). The seven skills are also registered natively in [.claude/skills/](file:///.claude/skills/) (invoke with `/architect-planner`, `/ticket-planner`, etc., or let Claude pick them by description); each one points to the canonical file in `.agents/skills/`. |
 | **OpenAI Codex / Copilot** | [CODEX.md](file:///CODEX.md), [.github/copilot-instructions.md](file:///.github/copilot-instructions.md) | Automatically injected in OpenAI Codex sessions and GitHub Copilot chats. |
 | **Gemini / Antigravity** | [GEMINI.md](file:///GEMINI.md), [AGENTS.md](file:///AGENTS.md) | Native discovery via `.agents/personas/`, `.agents/rules/`, and `.agents/skills/`. |
 

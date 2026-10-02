@@ -25,6 +25,8 @@ Single source of truth lives in `.agents/`; the root-level files are thin per-pl
 | Rules | `.agents/rules/*.md` | Cross-cutting standards every agent must obey; `agent-collaboration-protocol.md` defines handoffs |
 | Skills | `.agents/skills/<name>/SKILL.md` | Step-by-step procedures with YAML frontmatter (`name`, `description`) used as triggers |
 | Templates | `templates/` | Fill-in-the-blank deliverable formats (architecture plan, tickets, security audit, escalation, design brief, design tokens CSS) |
+| Claude Code subagents | `.claude/agents/*.md` | Native subagent definitions (`architect`, `web-designer`, `ticket-planner`, `dev-junior`, `dev-senior`, `security-specialist`). Thin wrappers: frontmatter + "read persona/skill/rules first" + subagent-specific constraints. Behavior lives in `.agents/`, not here |
+| Claude Code skills | `.claude/skills/<name>/SKILL.md` | Native registration of the 7 skills in `.agents/skills/` (same names). Thin wrappers (frontmatter copied from the original + "read `.agents/skills/<name>/SKILL.md` and follow it"); the procedure lives only in `.agents/skills/`, which Gemini/Antigravity also reads |
 | Platform adapters | `CLAUDE.md`, `AGENTS.md`, `GEMINI.md` (Gemini/Antigravity), `CODEX.md` + `.github/copilot-instructions.md` (Codex/Copilot), `.cursorrules` (Cursor) | Each restates the roster, the commit/push prohibition, and links into `.agents/` |
 | Sample output | `docs/tickets.md` | Example backlog produced by the Ticket Planner from the architecture template |
 
@@ -39,7 +41,8 @@ Single source of truth lives in `.agents/`; the root-level files are thin per-pl
 
 ## Editing Conventions
 
-- **Keep adapters in sync.** Changing a role's name, aliases (`@Architect`/`@Arquiteto`, `@Security`/`@Seguranca`, etc.), deliverable path, or the commit/push prohibition requires updating `CLAUDE.md`, `AGENTS.md`, `GEMINI.md`, `CODEX.md`, `.cursorrules`, `.github/copilot-instructions.md`, `README.md`, and the relevant persona/rule/skill. Adding a new agent also means adding a persona, a skill, a rule mention, and a row in each adapter.
+- **Keep adapters in sync.** Changing a role's name, aliases (`@Architect`/`@Arquiteto`, `@Security`/`@Seguranca`, etc.), deliverable path, or the commit/push prohibition requires updating the matching `.claude/agents/*.md` (its `description` carries the aliases/triggers Claude uses for auto-delegation), `CLAUDE.md`, `AGENTS.md`, `GEMINI.md`, `CODEX.md`, `.cursorrules`, `.github/copilot-instructions.md`, `README.md`, and the relevant persona/rule/skill. Adding a new agent also means adding a persona, a skill, a rule mention, and a row in each adapter.
+- **Skills have two files.** Edit the procedure only in `.agents/skills/<name>/SKILL.md`. If you change a skill's `name` or `description`, mirror it in `.claude/skills/<name>/SKILL.md`; adding a skill means creating both.
 - Role tags and deliverable paths (`docs/tickets.md`, `templates/*.template.md`) are referenced by name across files; grep before renaming.
 - Personas and aliases mix English and Portuguese on purpose; support both spellings.
 - Most internal links use `file:///.agents/...` style; prefer relative paths for new links.
@@ -47,6 +50,11 @@ Single source of truth lives in `.agents/`; the root-level files are thin per-pl
 ## Roles (invocation summary)
 
 Adopt the role requested by the user, or orchestrate by project phase. Full behavior is in the persona file.
+
+**Native subagents:** when the user mentions a role or alias (`@Architect`, `@DevJunior`, ...) or the task matches a role's trigger, dispatch the matching subagent from `.claude/agents/` via the Agent tool (`architect`, `web-designer`, `ticket-planner`, `dev-junior`, `dev-senior`, `security-specialist`). Subagents cannot ask the user questions or spawn other subagents, so **you (the main conversation) are the orchestrator**:
+- Architect returns clarifying questions or a WebDesigner request instead of guessing: relay the questions to the user (AskUserQuestion) or dispatch `web-designer`, then re-dispatch `architect` with the answers.
+- Junior Dev returns the "Technical Impediment Detected" message on a blocker: show it to the user; if they pick escalation, dispatch `dev-senior` with the impediment.
+- After each dev batch, dispatch `security-specialist`; route its remediation plan to `dev-junior` / `dev-senior` and repeat until Sign-Off.
 
 - **🏛️ Architect** (`@Architect` / `@Arquiteto`) — [.agents/personas/arquiteto.md](.agents/personas/arquiteto.md): NEVER ASSUME; ask clarifying questions; output plan from `templates/architecture-plan.template.md`.
 - **🎨 WebDesigner** (`@WebDesigner`) — [.agents/personas/web-designer.md](.agents/personas/web-designer.md): Bento Grid, refined dark mode (no pure `#000000`), WCAG 2.1 AA (4.5:1), CSS tokens in `:root`, HTML/CSS/SVG prototypes.
