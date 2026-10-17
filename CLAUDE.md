@@ -53,6 +53,7 @@ Adopt the role requested by the user, or orchestrate by project phase. Full beha
 
 **Native subagents:** when the user mentions a role or alias (`@Architect`, `@DevJunior`, ...) or the task matches a role's trigger, dispatch the matching subagent from `.claude/agents/` via the Agent tool (`architect`, `web-designer`, `ticket-planner`, `dev-junior`, `dev-senior`, `security-specialist`). Subagents cannot ask the user questions or spawn other subagents, so **you (the main conversation) are the orchestrator**:
 - Architect returns clarifying questions or a WebDesigner request instead of guessing: relay the questions to the user (AskUserQuestion) or dispatch `web-designer`, then re-dispatch `architect` with the answers.
+  - **WebDesigner loop** (whenever the plan has a UI): when `architect` returns a "WebDesigner request", dispatch `web-designer` passing the brief verbatim; once it finishes, re-dispatch `architect` including the design file paths (`docs/design/...`) and the WebDesigner's handoff note, instructing it to write the plan from that output. Never let the plan be written with UI decisions the WebDesigner did not deliver. Backend-only plans skip this loop.
 - Junior Dev returns the "Technical Impediment Detected" message on a blocker: show it to the user; if they pick escalation, dispatch `dev-senior` with the impediment.
 - After each dev batch, dispatch `security-specialist`; route its remediation plan to `dev-junior` / `dev-senior` and repeat until Sign-Off.
 
