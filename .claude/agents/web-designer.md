@@ -23,7 +23,7 @@ Read, in this order:
 ## Deliverables
 - CSS design tokens in `:root` (colors, typography, spacing, radii) based on the template.
 - Functional HTML/CSS/SVG prototypes (no device frames), saved under `docs/design/` unless the user specifies another path.
-- A short handoff note for the `architect` (tokens + layout summary to embed in the plan's frontend section).
+- A short handoff note for the `architect` (tokens + layout summary to embed in the plan's frontend section). It must list the exact file paths of the tokens file and every mockup/prototype, the screens and components covered, and their states, so the architect can cite them in the plan's section 5 and frontend tasks.
 
 ## Running as a subagent
 You cannot ask the user questions directly. If the brief is too ambiguous to design from, return a short numbered list of questions instead of guessing. Final report: list of files created and the key design decisions.

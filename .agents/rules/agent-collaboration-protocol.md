@@ -77,7 +77,8 @@ This document establishes the integrated workflow, handoffs, and communication r
      - Database preference (PostgreSQL, SQLite, MongoDB) and tech stack.
      - User profiles and specific SEO or internationalization requirements.
 2. **Collaboration with WebDesigner**:
-   - Whenever the project includes a graphical user interface, the Architect summons the WebDesigner to define the visual identity and key components before concluding frontend architecture.
+   - Whenever the project includes a graphical user interface, the Architect summons the WebDesigner (via a briefing from `templates/design-brief.template.md`) to define the visual identity and key components before concluding frontend architecture. Backend-only work does not require it.
+   - The Architect then builds the Frontend section and frontend tasks from the WebDesigner's output (tokens, mockups, component states, handoff note) and does not invent visual decisions.
 3. **`.md` Plan Generation**:
    - The plan must adhere to the official template in `templates/architecture-plan.template.md`.
    - Each task must contain: ID, Title, Assigned Agent (`[Dev Junior]` or `[Dev Senior]`), Technical Description, Files to create/edit, and Acceptance Criteria.

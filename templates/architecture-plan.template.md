@@ -75,9 +75,13 @@ Standardized Envelope:
 
 ## 5. Frontend, UI, and UX Guidelines (Approved with WebDesigner)
 
+> If the project has no UI, replace this whole section with "No UI in scope". Otherwise, every value below must come from the WebDesigner's deliverables (do not invent them); list the source files here.
+
+- **WebDesigner deliverables**: `docs/design/[tokens file]`, `docs/design/[mockup files]`
+
 ### 5.1 Visual Identity and Design Tokens
 - Base file: `src/styles/design-tokens.css`
-- Primary Palette:
+- Primary Palette (example values; replace with the WebDesigner's tokens):
   - Primary Background: `var(--bg-primary)` (#0B0F19)
   - Card Surface: `var(--bg-surface)` (#111827)
   - Accent: `var(--accent-primary)` (#6366F1)

@@ -31,10 +31,23 @@ Before designing any solution, conduct the alignment interview with the user:
 
 ## 2. Coordination with WebDesigner
 
-For projects with a graphical user interface:
-1. Request the **WebDesigner** to create the color palette (CSS Design Tokens) and mockups of primary screens.
-2. Integrate CSS tokens and layout structure provided by WebDesigner into the Frontend section of the plan.
-3. Ensure UX principles (Nielsen's Heuristics, loading states, error feedback) are present in the acceptance criteria of each screen.
+### 2.1 When to involve the WebDesigner
+- **Required** when the project or feature has any user-facing graphical interface (web/mobile app, dashboard, landing page, admin panel, visual templates).
+- **Not required** for pure APIs, CLIs, workers, or backend-only changes: write "No UI in scope" in section 5 of the plan.
+- If it is unclear whether a UI exists, ask the user (Elicitation Checklist) — do not guess.
+
+### 2.2 Procedure (UI in scope)
+1. **Brief**: fill [design-brief.template.md](../../../templates/design-brief.template.md) from the validated use cases (user profile, desired feel, screens/components required, expected deliverables) and send it to the **WebDesigner**.
+2. **Wait for the output**: do not draft the Frontend section, the frontend tasks, or any visual decision before the WebDesigner delivers (CSS tokens, mockups/prototypes under `docs/design/`, component states, handoff note).
+3. **Read the deliverables** (tokens file, mockups, handoff note) and build the plan from them — never from your own assumptions:
+   - Section 5 embeds/references the delivered tokens, typography, layout structure, and mockup paths verbatim.
+   - Frontend tasks (pages, components, style implementation) are derived from the mockups and cite the mockup file they implement.
+   - Component states (Default, Hover, Active, Focus, Disabled, Loading) and WCAG notes from the WebDesigner appear in the acceptance criteria of each screen.
+4. **Reconcile**: if the design conflicts with a technical constraint (stack, performance, accessibility), flag it as an open point for the user instead of silently changing the design or the architecture.
+5. Ensure UX principles (Nielsen's Heuristics, loading states, error feedback) are present in the acceptance criteria of each screen.
+
+> [!NOTE]
+> The Architect never invents tokens, palettes, or layouts. Visual identity belongs to the WebDesigner; the Architect only integrates it.
 
 ---
 
