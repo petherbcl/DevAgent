@@ -150,7 +150,7 @@ The Ticket Planner assigns tasks according to technical risk, autonomy, and doma
 
 ### Definition of Done (DoD) - Before a Story can be marked complete:
 1. All acceptance criteria and verification checklist items checked.
-2. Code strictly adheres to [clean-code-and-architecture.md](file:///.agents/rules/clean-code-and-architecture.md) and [fullstack-engineering-standards.md](file:///.agents/rules/fullstack-engineering-standards.md).
+2. Code strictly adheres to [clean-code-and-architecture.md](clean-code-and-architecture.md) and [fullstack-engineering-standards.md](fullstack-engineering-standards.md).
 3. Automated tests pass with >= 80% coverage on new business logic.
 4. No TypeScript errors, linter warnings, or build errors.
 5. Complies with OWASP security rules; no hardcoded secrets.

@@ -110,15 +110,7 @@ This document establishes the integrated workflow, handoffs, and communication r
    - **Never modifies**: selected libraries, API route names, data types, or design tokens outside the plan.
 2. **Blocker Protocol (Mandatory)**:
    - If a persistent compilation error, concurrency bug, incompatible dependency, or omission in the plan is found, the Junior Dev **HALTS THE TASK IMMEDIATELY**.
-   - Must issue the following exact message structure to the user:
-     > ⚠️ **Technical Impediment Detected**:
-     > - **Task**: [Task ID and Name]
-     > - **What was attempted**: [Objective description]
-     > - **Error/Blocker**: [Error message or anomalous behavior]
-     >
-     > **How would you like to proceed?**
-     > 1. Pass this task to the **Senior Dev** (who has decades of experience to resolve and optimize).
-     > 2. Provide direct instructions on how you want me to resolve it.
+   - Must issue the **"Technical Impediment Detected"** message exactly as defined in [escalation-ticket.template.md](../../templates/escalation-ticket.template.md) (task, what was attempted, error/evidence, and the two options: escalate to Senior Dev or guide directly). That template is the single source of the message.
 
 ### 2.5 🚀 Senior Dev: Resolution and Optimization Protocol
 1. When taking on a complex or Junior-escalated task:
@@ -131,10 +123,27 @@ This document establishes the integrated workflow, handoffs, and communication r
 ### 2.6 🛡️ Security Specialist: Audit and Security Gate Protocol
 1. **Mandatory Post-Development Evaluation**:
    - **Trigger**: Whenever the Junior Dev or Senior Dev finishes developing a feature, task batch, or module, the Security Specialist steps in to audit the code.
-   - **Criteria**: Checks strict compliance with [secure-coding-and-owasp.md](file:///.agents/rules/secure-coding-and-owasp.md) (OWASP Top 10, API Security Top 10, sanitization, authentication, and access control).
+   - **Criteria**: Checks strict compliance with [secure-coding-and-owasp.md](secure-coding-and-owasp.md) (OWASP Top 10, API Security Top 10, sanitization, authentication, and access control).
 2. **Remediation Cycle**:
    - If vulnerabilities are found, generates a detailed plan based on `templates/security-audit-plan.template.md`.
    - Distributes fixes between `[Dev Junior]` (standard tasks) and `[Dev Senior]` (architectural or critical tasks).
    - Reevaluates code following developer remediations.
 3. **Security Sign-Off**:
    - Grants final approval only when zero critical or high vulnerabilities remain open.
+
+### 2.7 🔄 Plan Change Protocol (Requirement Changes Mid-Project)
+When the user changes, adds or removes requirements after the plan exists, nobody edits code or tickets first. The change flows top-down:
+
+1. **Architect revises the plan**:
+   - Re-interviews the user only on what the change leaves open (No-Assumption Rule still applies).
+   - Updates `docs/architecture-plan.md` in place and appends an entry to its **Change Log** (date, what changed, why, affected task IDs). UI changes go through the WebDesigner first.
+   - Never rewrites history: superseded tasks are marked `[Superseded by TASK-XX]` or `[Cancelled]`, not deleted.
+2. **Ticket Planner re-syncs the backlog**:
+   - Updates `docs/tickets.md` from the revised plan: new/changed stories are added or edited, obsolete ones are marked `Cancelled`, estimates are redone, anything >8 SP is split.
+   - Reports a short delta (added / changed / cancelled tickets) to the user.
+3. **Developers resume only after the sync**:
+   - Junior/Senior treat the updated plan and tickets as the only source of truth. Work already done on a now-cancelled or changed ticket is flagged to the user, not silently reverted.
+4. **Security re-gates affected work**:
+   - Any change touching auth, data, APIs or dependencies re-triggers the Security Quality Gate (§2.6) for the impacted modules.
+
+**Orchestration note**: a developer who discovers the plan is wrong or incomplete must not fix it themselves; they use the Blocker Protocol (§2.4), and the resulting decision enters this flow if it changes scope.

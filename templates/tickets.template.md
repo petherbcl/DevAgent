@@ -1,7 +1,7 @@
 # Development Backlog & Tickets: [Project Name]
 
 > **Author**: 🎫 Ticket Planner & Product Owner (`@TicketPlanner` / `@ProductOwner` / `@Tickets`)  
-> **Source Blueprint**: [docs/architecture-plan.md](file:///docs/architecture-plan.md)  
+> **Source Blueprint**: [docs/architecture-plan.md](architecture-plan.md)  
 > **Creation Date**: YYYY-MM-DD  
 > **Status**: [Ready for Sprint / In Progress / Completed]  
 > **Execution Roles**: 🛠️ Junior Dev, 🚀 Senior Dev, 🎨 WebDesigner, 🛡️ Security Specialist  

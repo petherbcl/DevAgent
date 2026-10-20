@@ -61,12 +61,12 @@ The system consists of 6 fundamental agents with strict roles and boundaries:
 ## 📋 Execution Rules and Best Practices
 
 All agents must adhere to the rule manuals defined in `.agents/rules/`:
-- **Ticket Creation & Backlog**: [ticket-creation-standards.md](file:///.agents/rules/ticket-creation-standards.md)
-- **UI/UX**: [ui-ux-best-practices.md](file:///.agents/rules/ui-ux-best-practices.md)
-- **Programming & Backend**: [fullstack-engineering-standards.md](file:///.agents/rules/fullstack-engineering-standards.md)
-- **Quality & Clean Code**: [clean-code-and-architecture.md](file:///.agents/rules/clean-code-and-architecture.md)
-- **Security & OWASP**: [secure-coding-and-owasp.md](file:///.agents/rules/secure-coding-and-owasp.md)
-- **Collaboration & Handoff**: [agent-collaboration-protocol.md](file:///.agents/rules/agent-collaboration-protocol.md)
+- **Ticket Creation & Backlog**: [ticket-creation-standards.md](.agents/rules/ticket-creation-standards.md)
+- **UI/UX**: [ui-ux-best-practices.md](.agents/rules/ui-ux-best-practices.md)
+- **Programming & Backend**: [fullstack-engineering-standards.md](.agents/rules/fullstack-engineering-standards.md)
+- **Quality & Clean Code**: [clean-code-and-architecture.md](.agents/rules/clean-code-and-architecture.md)
+- **Security & OWASP**: [secure-coding-and-owasp.md](.agents/rules/secure-coding-and-owasp.md)
+- **Collaboration & Handoff**: [agent-collaboration-protocol.md](.agents/rules/agent-collaboration-protocol.md)
 
 ---
 
@@ -106,8 +106,8 @@ This ecosystem is designed to run seamlessly across all major AI coding platform
 
 | Platform / Tool | Configuration File | Role Invocation & Behavior |
 |---|---|---|
-| **Cursor** | [.cursorrules](file:///.cursorrules) | Tag `@Architect`, `@WebDesigner`, `@TicketPlanner`, `@DevJunior`, `@DevSenior`, `@Security` in Chat / Composer |
-| **Claude / Claude Code** | [CLAUDE.md](file:///CLAUDE.md) | Native instruction discovery in Claude Code CLI & Claude Projects |
-| **OpenAI Codex / Copilot** | [CODEX.md](file:///CODEX.md), [.github/copilot-instructions.md](file:///.github/copilot-instructions.md) | Loaded automatically in Codex environments and GitHub Copilot |
-| **Gemini / Antigravity** | [GEMINI.md](file:///GEMINI.md), [AGENTS.md](file:///AGENTS.md) | Full multi-agent discovery via `.agents/personas/`, `.agents/rules/`, and `.agents/skills/` |
+| **Cursor** | [.cursorrules](.cursorrules) | Tag `@Architect`, `@WebDesigner`, `@TicketPlanner`, `@DevJunior`, `@DevSenior`, `@Security` in Chat / Composer |
+| **Claude / Claude Code** | [CLAUDE.md](CLAUDE.md) | Native instruction discovery in Claude Code CLI & Claude Projects |
+| **OpenAI Codex / Copilot** | [CODEX.md](CODEX.md), [.github/copilot-instructions.md](.github/copilot-instructions.md) | Loaded automatically in Codex environments and GitHub Copilot |
+| **Gemini / Antigravity** | [GEMINI.md](GEMINI.md), [AGENTS.md](AGENTS.md) | Full multi-agent discovery via `.agents/personas/`, `.agents/rules/`, and `.agents/skills/` |
 

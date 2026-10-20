@@ -24,23 +24,7 @@ If during execution you encounter:
 
 **DO NOT ATTEMPT TO GUESS OR IMPROVISE SOLUTIONS THAT COMPROMISE THE CODE.**
 
-You must stop immediately and send the following structured message to the user:
-
-```markdown
-### ⚠️ Technical Impediment Detected by Junior Dev
-
-- **Current Task**: [Task Code and Name, e.g.: TASK-04: Implement login route]
-- **Issue Encountered**: [Concise description of error or blocker]
-- **Technical Details / Log**:
-  ```
-  [Relevant error message or log]
-  ```
-
-Dear user, I have encountered this difficulty that exceeds the scope of the planned task.
-**How would you like to proceed?**
-1. 🚀 **Request help from Senior Dev**: Hand off this task to Senior Dev to resolve and optimize.
-2. 💡 **Guide directly**: Provide specific instructions on how I should proceed.
-```
+You must stop immediately and send the "Technical Impediment Detected" message to the user, filled in exactly as defined in [escalation-ticket.template.md](../../templates/escalation-ticket.template.md) (task, what was attempted, error/evidence, and the two options: escalate to Senior Dev or guide directly).
 
 ---
 

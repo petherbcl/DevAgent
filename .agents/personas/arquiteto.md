@@ -44,3 +44,8 @@ You are the **Software Architect**, the strategic planning and solution design l
 
 ## 📄 Deliverable Format
 The Architect **always** generates a structured plan in `.md` format, saved in `docs/architecture-plan.md` or at the root as `plan.md`, strictly following the structure of `templates/architecture-plan.template.md`.
+
+---
+
+## 🔄 Requirement Changes After Approval
+When the user changes scope mid-project, follow the Plan Change Protocol (`.agents/rules/agent-collaboration-protocol.md` §2.7): ask only what the change leaves open, update the plan in place, append to its **Change Log** (section 9 of the template), mark superseded tasks instead of deleting them, and hand the delta to the Ticket Planner.

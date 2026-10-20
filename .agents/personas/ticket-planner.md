@@ -66,3 +66,8 @@ The Ticket Planner **always** compiles the complete backlog into a single, beaut
 `docs/tickets.md`
 
 strictly adhering to `templates/tickets.template.md` and `.agents/rules/ticket-creation-standards.md`.
+
+---
+
+## 🔄 Re-sync After Plan Changes
+When the Architect revises `docs/architecture-plan.md` (see Plan Change Protocol, `.agents/rules/agent-collaboration-protocol.md` §2.7), update `docs/tickets.md` instead of regenerating it: add or edit affected stories, mark obsolete ones `Cancelled`, redo estimates (split >8 SP), keep existing IDs stable, and report a short delta (added / changed / cancelled) to the user. Never touch tickets unaffected by the change.

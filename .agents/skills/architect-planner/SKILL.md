@@ -54,7 +54,7 @@ Before designing any solution, conduct the alignment interview with the user:
 ## 3. Structuring the Architecture Plan (`plan.md`)
 
 The final plan must be saved in `docs/architecture-plan.md` or at the root as `plan.md` following the template:
-- Consult the official template at: [architecture-plan.template.md](../../templates/architecture-plan.template.md)
+- Consult the official template at: [architecture-plan.template.md](../../../templates/architecture-plan.template.md)
 
 ### Mandatory Task Breakdown:
 - Tasks assigned to `[Dev Junior]`:

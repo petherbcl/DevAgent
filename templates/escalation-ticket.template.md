@@ -1,4 +1,6 @@
-# ⚠️ Technical Blocker Escalation Ticket (Junior Dev)
+# ⚠️ Technical Impediment Detected — Escalation Ticket (Junior Dev)
+
+> **Single source of truth** for the blocker message. The protocol, persona and subagent files reference this template instead of repeating it.
 
 > **Issued by**: 🛠️ Junior Dev  
 > **Date**: YYYY-MM-DD HH:mm  

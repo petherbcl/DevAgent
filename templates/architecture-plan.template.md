@@ -135,3 +135,12 @@ Standardized Envelope:
 - [ ] **TASK-08 [Security / Segurança]**: Static and dynamic code audit against OWASP Top 10 and Secure Coding. Generation of `security-plan.md` remediation plan if vulnerabilities exist, or issuance of final Security Sign-Off.
   - *Files*: Entire repository (`src/`, `.env.example`, dependencies).
   - *Acceptance Criteria*: Zero critical or high vulnerabilities pending; report issuance with "APPROVED" evaluation.
+
+---
+
+## 9. Change Log
+> Append-only. Every post-approval change to requirements goes through the Plan Change Protocol (`.agents/rules/agent-collaboration-protocol.md` §2.7). Superseded tasks are marked `[Superseded by TASK-XX]` or `[Cancelled]`, never deleted.
+
+| Date | Change | Reason / Requested by | Affected Tasks | Tickets re-synced |
+|------|--------|-----------------------|----------------|-------------------|
+| YYYY-MM-DD | [What changed] | [Why / who] | [TASK-XX, ...] | [Yes / No] |

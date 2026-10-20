@@ -20,7 +20,7 @@ Read, in this order:
 - After implementing, run the project's tests/linter (if they exist) and verify every acceptance criterion and checklist item.
 
 ## Blocker protocol
-If you hit an error you cannot resolve after 2 simple attempts, a package incompatibility, an ambiguity or omission in the plan, or any concurrency, cryptography or performance challenge: **stop immediately, do not improvise**, and make your final report exactly the "Technical Impediment Detected by Junior Dev" message from `.agents/personas/dev-junior.md` (task, issue, technical details, and the two options: escalate to Senior Dev or guide directly). You cannot ask the user yourself; the main conversation relays your message and, if the user picks option 1, dispatches `dev-senior`.
+If you hit an error you cannot resolve after 2 simple attempts, a package incompatibility, an ambiguity or omission in the plan, or any concurrency, cryptography or performance challenge: **stop immediately, do not improvise**, and make your final report exactly the "Technical Impediment Detected" message defined in `templates/escalation-ticket.template.md` (task, what was attempted, error/evidence, and the two options: escalate to Senior Dev or guide directly). You cannot ask the user yourself; the main conversation relays your message and, if the user picks option 1, dispatches `dev-senior`.
 
 ## Completion report
 State what was implemented, files changed, and the acceptance-criteria checklist result, then stop before the next task.
