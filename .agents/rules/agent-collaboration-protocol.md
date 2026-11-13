@@ -147,3 +147,16 @@ When the user changes, adds or removes requirements after the plan exists, nobod
    - Any change touching auth, data, APIs or dependencies re-triggers the Security Quality Gate (§2.6) for the impacted modules.
 
 **Orchestration note**: a developer who discovers the plan is wrong or incomplete must not fix it themselves; they use the Blocker Protocol (§2.4), and the resulting decision enters this flow if it changes scope.
+
+### 2.8 🧩 Third-Party Skills Check (All Agents, Before Starting)
+Third-party skills (e.g. `transitions-dev`, `transitions-polish`) are pinned in `skills-lock.json` at the project root but their content is git-ignored (license), so a fresh clone does not have them. Every agent runs this check **once per session, before its first task**:
+
+1. **Detect**: read `skills-lock.json`. If it does not exist, skip this section. Otherwise, for each skill name under `skills`, check that `.agents/skills/<name>/SKILL.md` exists.
+2. **All present**: proceed normally, saying nothing.
+3. **Some missing, and you can talk to the user** (main conversation / chat):
+   - Ask **once**, listing the missing skills and the exact command, for example: *"The third-party skills `transitions-dev`, `transitions-polish` (listed in `skills-lock.json`) are not installed. Do you want me to install them with `npx skills experimental_install -a codex`?"*
+   - **Yes** → run exactly `npx skills experimental_install -a codex` from the project root, confirm every `.agents/skills/<name>/SKILL.md` now exists, report the result, then continue with the task. If the command fails, show the error and continue without the skills.
+   - **No** → continue without them and do not ask again in the same session. Where a missing skill would have been used, fall back to the in-house rules (e.g. [ui-ux-best-practices.md](ui-ux-best-practices.md) §2.5 micro-interaction values for transitions) and mention the fallback in your report.
+4. **Some missing, and you are a subagent** (cannot ask the user): do **not** install anything. Start your final report with the line `Third-party skills missing: <names>. Ask the user whether to run: npx skills experimental_install -a codex`, then do the task using the fallback above. The orchestrator asks the user and, on yes, runs the command.
+
+**Guardrails**: never run the install without the user's explicit "yes"; always keep `-a codex` (it installs only into `.agents/skills/`; without it the CLI replaces the `.claude/skills/` thin wrappers with junctions); never run other `npx skills` commands (`add`, `update`, `remove`) on your own initiative; never commit the downloaded folders.

@@ -76,8 +76,10 @@ Every interactive component (buttons, inputs, clickable cards, dropdowns) **must
 6. **Loading**: Inline progress indicator preserving exact button dimensions to prevent layout shifts (CLS).
 
 ### 2.5 Transitions and Animations
-- Ideal duration for micro-interactions: between `150ms` and `250ms`.
-- Acceleration curve: `cubic-bezier(0.4, 0, 0.2, 1)` (standard ease-out).
+- Ideal duration for micro-interactions (hover, focus, button press, color/opacity changes): between `150ms` and `250ms`.
+- Acceleration curve for those micro-interactions: `cubic-bezier(0.4, 0, 0.2, 1)` (standard ease-out).
+- **Component transitions** (modals, dropdowns, panels, page slides, toasts, tooltips, accordions, tabs, skeleton reveals, success/error feedback, number changes, AI thinking/streaming states, etc.) must not be hand-rolled: use the matching recipe from the [`transitions-dev`](../skills/transitions-dev/SKILL.md) skill, and tune or audit existing motion with [`transitions-polish`](../skills/transitions-polish/SKILL.md). For these patterns its motion-token scale (durations up to `500ms`, `--ease-smooth-out` and the other easings in [`_root.css`](../skills/transitions-polish/_root.css)) takes precedence over the micro-interaction values above.
+- **Attribution (license requirement):** keep the `transitions.dev` comment that ships with each transition snippet when pasting it into project code; never strip it during refactors or minification passes over source files. Copy into a project only the transitions it actually uses, never the whole collection.
 - Respect the `prefers-reduced-motion` accessibility directive:
   ```css
   @media (prefers-reduced-motion: reduce) {

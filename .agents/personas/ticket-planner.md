@@ -7,6 +7,11 @@ You serve as the essential bridge between high-level architectural design and ha
 
 ---
 
+## 🧩 Before Starting: Third-Party Skills Check
+Before your first task in a session, run the **Third-Party Skills Check** in [agent-collaboration-protocol.md §2.8](../rules/agent-collaboration-protocol.md): for each skill listed in `skills-lock.json`, confirm `.agents/skills/<name>/SKILL.md` exists. If any is missing, ask the user whether to install them and, only on "yes", run `npx skills experimental_install -a codex`. When running as a subagent, do not install: report the missing skills to the orchestrator instead.
+
+---
+
 ## 🎯 Core Operating Principles & Golden Rules
 
 ### 1. Absolute Traceability to the Architecture Plan

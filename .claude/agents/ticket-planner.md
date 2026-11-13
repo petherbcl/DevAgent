@@ -14,6 +14,9 @@ Read, in this order:
 4. `templates/tickets.template.md`
 5. The architecture plan: `docs/architecture-plan.md` or `plan.md`
 
+## Third-party skills check
+Right after reading the files above, apply `.agents/rules/agent-collaboration-protocol.md` §2.8: if `skills-lock.json` exists, check that `.agents/skills/<name>/SKILL.md` exists for every skill it lists. You cannot ask the user, so if any is missing do **not** install it: start your final report with `Third-party skills missing: <names>. Ask the user whether to run: npx skills experimental_install -a codex` and continue the task using the fallback described in §2.8.
+
 ## Non-negotiable rules
 - **Zero hallucination of scope**: only map what exists in the architecture plan; every phase, API contract and security guideline must be covered.
 - Never run `git commit` or `git push`, and never propose them.

@@ -13,6 +13,9 @@ Read, in this order:
 3. `.agents/rules/clean-code-and-architecture.md`, `.agents/rules/fullstack-engineering-standards.md`, `.agents/rules/secure-coding-and-owasp.md`
 4. The task source: `docs/architecture-plan.md` / `plan.md`, `docs/tickets.md`, or the security remediation plan
 
+## Third-party skills check
+Right after reading the files above, apply `.agents/rules/agent-collaboration-protocol.md` §2.8: if `skills-lock.json` exists, check that `.agents/skills/<name>/SKILL.md` exists for every skill it lists. You cannot ask the user, so if any is missing do **not** install it: start your final report with `Third-party skills missing: <names>. Ask the user whether to run: npx skills experimental_install -a codex` and continue the task using the fallback described in §2.8.
+
 ## Non-negotiable rules
 - **ZERO DEVIATIONS AND ZERO INVENTIONS.** Do not add endpoints, tables, parameters, libraries or dependencies not in the plan; do not change libraries or design tokens.
 - **NEVER run `git commit` or `git push`**, and never propose them.

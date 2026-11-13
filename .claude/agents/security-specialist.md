@@ -14,6 +14,9 @@ Read, in this order:
 4. `templates/security-audit-plan.template.md`
 5. The code under review plus `docs/architecture-plan.md` / `plan.md` for threat-model context
 
+## Third-party skills check
+Right after reading the files above, apply `.agents/rules/agent-collaboration-protocol.md` §2.8: if `skills-lock.json` exists, check that `.agents/skills/<name>/SKILL.md` exists for every skill it lists. You cannot ask the user, so if any is missing do **not** install it: start your final report with `Third-party skills missing: <names>. Ask the user whether to run: npx skills experimental_install -a codex` and continue the task using the fallback described in §2.8.
+
 ## Non-negotiable rules
 - You audit and plan; you do **not** fix application code. Fixes are assigned to `[Dev Junior]` (standard) or `[Dev Senior]` (critical/architectural). You may write only audit documents.
 - Use `Bash` for read-only inspection (e.g. dependency audit, secret scanning, `git diff`/`git log`). **NEVER run `git commit` or `git push`**, and never propose them.

@@ -113,6 +113,21 @@ Skills are located in `.agents/skills/` and are triggered as needed:
 | **`security-specialist`** | [.agents/skills/security-specialist/SKILL.md](.agents/skills/security-specialist/SKILL.md) | Source code security audit, OWASP/Secure Coding mapping, remediation plan generation, and post-development Security Gate. |
 | **`fullstack-standards`** | [.agents/skills/fullstack-standards/SKILL.md](.agents/skills/fullstack-standards/SKILL.md) | Canonical API response envelope templates, Zod validation, repositories, and typed components. |
 
+### Third-party skills
+
+Installed with the [`skills`](https://skills.sh/) CLI and pinned in [skills-lock.json](skills-lock.json). Their content is **not committed** (the transitions.dev license forbids publishing the collection; see [`.gitignore`](.gitignore)), so after cloning download them once:
+
+```bash
+npx skills experimental_install -a codex
+```
+
+`-a codex` installs only into `.agents/skills/` (read natively by Codex, Gemini/Antigravity and Copilot) and leaves the committed Claude Code thin wrappers in `.claude/skills/` untouched; without it the CLI replaces them with junctions. They are never edited locally. Until they are downloaded, `scripts/check-consistency.ps1` only warns about them.
+
+| Skill | Location | Purpose |
+| :--- | :--- | :--- |
+| **`transitions-dev`** | [.agents/skills/transitions-dev/SKILL.md](.agents/skills/transitions-dev/SKILL.md) | 36 production-ready CSS transitions from [transitions.dev](https://transitions.dev) (modals, dropdowns, toasts, tabs, skeletons, success/error feedback, AI streaming states…), each with a `prefers-reduced-motion` guard. |
+| **`transitions-polish`** | [.agents/skills/transitions-polish/SKILL.md](.agents/skills/transitions-polish/SKILL.md) | Motion-token scale (duration, distance, scale, blur, easing) and rules to audit and tune existing animations. |
+
 ---
 
 ## 📜 Best Practice Rules (Automatically Injected)

@@ -12,6 +12,9 @@ Read, in this order:
 3. `.agents/rules/clean-code-and-architecture.md`, `.agents/rules/fullstack-engineering-standards.md`, `.agents/rules/secure-coding-and-owasp.md`
 4. The task source: `docs/architecture-plan.md` / `plan.md`, `docs/tickets.md`, the security remediation plan, or the escalated impediment message
 
+## Third-party skills check
+Right after reading the files above, apply `.agents/rules/agent-collaboration-protocol.md` §2.8: if `skills-lock.json` exists, check that `.agents/skills/<name>/SKILL.md` exists for every skill it lists. You cannot ask the user, so if any is missing do **not** install it: start your final report with `Third-party skills missing: <names>. Ask the user whether to run: npx skills experimental_install -a codex` and continue the task using the fallback described in §2.8.
+
 ## Non-negotiable rules
 - **NEVER run `git commit` or `git push`** (nor `git commit --amend`, force pushes, or scripts/CI that do so), and never propose them. This overrides the persona's general permission to run `git`; read-only git commands (`status`, `diff`, `log`) are fine.
 - Follow the architecture plan as baseline; you may adopt a demonstrably better approach, but document each deviation with its technical rationale.

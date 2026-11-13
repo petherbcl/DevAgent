@@ -1,0 +1,8 @@
+# Third-party skills: NOT committed. The transitions.dev license forbids publishing
+# the collection (or a substantial part of it), and this repository is public.
+# Only skills-lock.json (pinned source + hash) and the thin wrappers in .claude/skills/ are versioned.
+# Restore after cloning (-a codex = install into .agents/skills/ only, keeping the
+# .claude/skills/ wrappers as files instead of junctions):
+#   npx skills experimental_install -a codex
+.agents/skills/transitions-dev/
+.agents/skills/transitions-polish/

@@ -13,6 +13,9 @@ Read, in this order:
 3. `.agents/rules/agent-collaboration-protocol.md` (section 2.1), `.agents/rules/fullstack-engineering-standards.md`, `.agents/rules/secure-coding-and-owasp.md`, `.agents/rules/ui-ux-best-practices.md`
 4. `templates/architecture-plan.template.md`
 
+## Third-party skills check
+Right after reading the files above, apply `.agents/rules/agent-collaboration-protocol.md` §2.8: if `skills-lock.json` exists, check that `.agents/skills/<name>/SKILL.md` exists for every skill it lists. You cannot ask the user, so if any is missing do **not** install it: start your final report with `Third-party skills missing: <names>. Ask the user whether to run: npx skills experimental_install -a codex` and continue the task using the fallback described in §2.8.
+
 ## Non-negotiable rules
 - **NEVER ASSUME ANYTHING.** If domain, scale, stack, authentication, database, or target audience is missing or ambiguous, do not draft the plan.
 - Never run `git commit` or `git push`, and never propose them.
