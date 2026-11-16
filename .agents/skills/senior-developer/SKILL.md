@@ -6,46 +6,28 @@ description: >-
   database transactions, and applying superior architectural patterns.
 ---
 
-# Skill: Advanced Engineering, Optimization, and Blocker Resolution (Senior Dev)
+# Skill: Advanced Engineering, Optimization and Blocker Resolution (Senior Dev)
 
-This skill guides the **Senior Dev** in solving complex engineering challenges, proactive architectural optimization, and technical mentoring across the ecosystem.
+Authority, command permissions and limits live in [dev-senior.md](../../personas/dev-senior.md); this is the procedure.
 
----
+## 1. Optimizing the Plan
+1. Spot bottlenecks (N+1 loops, missing atomic transactions, inefficient polling) and implement the superior alternative (batched joins, transactions with automatic rollback, SSE/WebSockets).
+2. Refactor internals to be clean, maintainable and test-covered without breaking public signatures or API contracts.
+3. For each deviation from the plan, add:
+   > ðŸ’¡ **Optimization Applied by Senior Dev**:
+   > - **Previous Approach**: [initial plan approach]
+   > - **New Approach Adopted**: [technical explanation]
+   > - **Benefit**: [impact on performance, security or maintainability]
 
-## 1. Decision Principles and Technical Autonomy
+## 2. Escalated Tasks
+1. **Diagnose the root cause**: no palliatives (`// @ts-ignore`, `any`, swallowed errors); find the fundamental cause (typing, concurrency, native OS dependencyâ€¦).
+2. **Fix definitively**, with defensive error handling, structured logs and regression tests.
+3. **Explain** what was fixed and why, for the Junior Dev and the user.
 
-The Senior Dev respects the objectives of the Architect's plan, but possesses authority to:
-1. **Identify Bottlenecks**: If the plan proposes a suboptimal solution (e.g., N+1 query loop, missing atomic transaction, inefficient polling), the Senior Dev must implement the superior alternative (e.g., batch fetch with join, transaction with automatic rollback, SSE/WebSockets).
-2. **Safe Refactoring**:
-   - Preserve agreed-upon public signatures and API contracts.
-   - Refactor internal implementation to make it clean, maintainable, and covered by tests.
-3. **Mandatory Decision Record**:
-   - Whenever altering an approach from the plan, add an explanatory section:
-     > 💡 **Optimization Applied by Senior Dev**:
-     > - **Previous Approach**: [Description of initial plan approach]
-     > - **New Approach Adopted**: [Technical explanation of the superior solution]
-     > - **Benefit**: [Impact on performance, security, or maintainability]
-
----
-
-## 2. Resolving Tasks Escalated by Junior Dev
-
-Upon receiving an escalated task:
-1. **Root Cause Diagnosis**:
-   - Do not apply palliative fixes (such as suppressing errors with `// @ts-ignore` or `any`).
-   - Identify the fundamental cause (typing incompatibility, concurrency, OS native dependency, etc.).
-2. **Robust Implementation**:
-   - Implement the definitive solution.
-   - Add defensive error handling and structured logs to prevent recurrence.
-3. **Didactic Explanation**:
-   - Leave clear notes so the Junior Dev and the user understand what was fixed and why.
-
----
-
-## 3. Engineering Excellence Checklist
-- [ ] Does code comply with SOLID principles and Clean Architecture?
-- [ ] Are multi-resource database operations wrapped in atomic transactions?
-- [ ] Are input parameters strictly validated against schemas before processing?
-- [ ] Do passwords and sensitive data use proper hashing/encryption (Argon2id/bcrypt) and remain excluded from logs?
-- [ ] Do error responses follow the standard envelope without exposing stack traces in production?
-- [ ] Were unit or integration tests added for critical functionality?
+## 3. Engineering Checklist
+- [ ] SOLID and Clean Architecture respected.
+- [ ] Multi-resource DB operations wrapped in atomic transactions.
+- [ ] Inputs validated against schemas before processing.
+- [ ] Passwords/sensitive data hashed or encrypted (Argon2id/bcrypt) and kept out of logs.
+- [ ] Errors use the standard envelope, no stack traces in production.
+- [ ] Unit or integration tests added for critical functionality.

@@ -77,14 +77,14 @@ Standardized Envelope:
 
 > If the project has no UI, replace this whole section with "No UI in scope". Otherwise, every value below must come from the WebDesigner's deliverables (do not invent them); list the source files here.
 
-- **WebDesigner deliverables**: `docs/design/[tokens file]`, `docs/design/[mockup files]`
+- **WebDesigner deliverables**: `docs/design/design-tokens.css`, `docs/design/mockups/[screen].html`
 
 ### 5.1 Visual Identity and Design Tokens
-- Base file: `src/styles/design-tokens.css`
+- Base file: `src/styles/design-tokens.css` (implemented from `docs/design/design-tokens.css`)
 - Primary Palette (example values; replace with the WebDesigner's tokens):
-  - Primary Background: `var(--bg-primary)` (#0B0F19)
-  - Card Surface: `var(--bg-surface)` (#111827)
-  - Accent: `var(--accent-primary)` (#6366F1)
+  - Primary Background: `var(--color-bg-base)` (#0B0F19)
+  - Card Surface: `var(--color-bg-surface)` (#111827)
+  - Accent: `var(--color-accent-primary)` (#6366F1)
 - Typography: `Plus Jakarta Sans` or `Inter` via Google Fonts.
 
 ### 5.2 Mandatory Heuristics and States
@@ -103,7 +103,7 @@ Standardized Envelope:
 
 ### Phase 2: Visual Identity and Design Tokens
 - [ ] **TASK-02 [WebDesigner]**: Creation of CSS tokens stylesheet, typography, and functional mockup of main screens.
-  - *Files*: `src/styles/design-tokens.css`, `mockups/dashboard.html`.
+  - *Files*: `docs/design/design-tokens.css`, `docs/design/mockups/dashboard.html`.
   - *Acceptance Criteria*: Tokens integrated and validated against WCAG AA contrast.
 
 ### Phase 3: Data Layer and Models
@@ -132,7 +132,7 @@ Standardized Envelope:
   - *Acceptance Criteria*: Core Web Vitals approved and functional integrity verified.
 
 ### Phase 8: Security Quality Gate & OWASP Audit
-- [ ] **TASK-08 [Security / Segurança]**: Static and dynamic code audit against OWASP Top 10 and Secure Coding. Generation of `security-plan.md` remediation plan if vulnerabilities exist, or issuance of final Security Sign-Off.
+- [ ] **TASK-08 [Security / Segurança]**: Static and dynamic code audit against OWASP Top 10 and Secure Coding. Generation of the `docs/security-audit.md` remediation plan if vulnerabilities exist, or issuance of final Security Sign-Off.
   - *Files*: Entire repository (`src/`, `.env.example`, dependencies).
   - *Acceptance Criteria*: Zero critical or high vulnerabilities pending; report issuance with "APPROVED" evaluation.
 

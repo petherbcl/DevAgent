@@ -9,120 +9,21 @@ description: >-
 
 # Skill: Agile Ticket Decomposition and Backlog Generation (Epics & Stories)
 
-This skill guides the **Ticket Planner & Product Owner (`@TicketPlanner` / `@ProductOwner` / `@Tickets`)** in translating high-level architectural designs and task lists into actionable, robust development tickets written to `docs/tickets.md`.
+Rules: [ticket-planner.md](../../personas/ticket-planner.md). Standards: [ticket-creation-standards.md](../../rules/ticket-creation-standards.md). Format: [tickets.template.md](../../../templates/tickets.template.md); every Epic and Story follows its structure exactly.
 
----
+## 1. Ingest the Plan
+1. Read `docs/architecture-plan.md` or `plan.md`; otherwise use the plan in the conversation; if none exists, ask the user to run `@Architect` first.
+2. Extract: objectives and use cases; tech stack with versions; data models (entities, relations, migrations, indexes); API contracts (method, path, payloads, envelopes, error codes); UI/UX guidelines (tokens, components, accessibility, mockup paths); the Architect's tasks with their `[Dev Junior]` / `[Dev Senior]` tags.
 
-## 1. Input Blueprint Ingestion
+## 2. Define Epics
+Group related domains and phases into cohesive Epics (attributes: standards Â§3). Typical set, adapted to the plan and never padded:
+`EPIC-01` Foundation & Infrastructure Â· `EPIC-02` Data Layer & Persistence Â· `EPIC-03` Authentication & Security Core Â· `EPIC-04` Business Domain & API Services Â· `EPIC-05` Frontend & Design Tokens Â· `EPIC-06` Security Audit & Quality Gate.
 
-1. **Locate the Architecture Plan**:
-   - Check `docs/architecture-plan.md` or `plan.md` in the workspace root.
-   - If not found on disk, analyze the architectural plan present in the conversation history or request the user to run `@Architect` first.
-2. **Extract Key Architectural Artifacts**:
-   - **System Overview & Objectives**: Business value and core use cases.
-   - **Selected Tech Stack**: Frameworks, databases, libraries, and runtime versions.
-   - **Data Architecture & Models**: Entities, relationships, migrations, indexes.
-   - **RESTful API Contracts**: Method, path, request payloads, response envelopes, error codes.
-   - **UI/UX Guidelines**: CSS tokens, component hierarchy, accessibility requirements.
-   - **Architect Task Plan**: Phases and task assignments (`[Dev Junior]` vs `[Dev Senior]`).
+## 3. Write Stories
+Decompose each Epic into INVEST stories (standards Â§2), aiming for 1â€“5 SP so they can run in parallel where possible. For each: role tag (Â§5), estimate (Â§6), priority (Â§7), `Blocked by` / `Blocks`, target files, contracts and entities, Gherkin scenarios and verification checklist (Â§4). Check DoR (Â§8) before finishing.
 
----
-
-## 2. Deconstruction into Epics and Stories
-
-### Step 1: Define Macro Epics
-Group related architectural domains and phases into cohesive, high-level **Epics**:
-- **`EPIC-01: Foundation & Infrastructure Setup`**: Base repo, TypeScript, linter, Docker, environment.
-- **`EPIC-02: Data Layer & Persistence Modeling`**: Migrations, entities, seeds, repository interfaces.
-- **`EPIC-03: Authentication & Security Core`**: Token lifecycle, password hashing, auth guards, rate limiting.
-- **`EPIC-04: Business Domain Features & API Services`**: Core CRUDs, service business logic, controllers.
-- **`EPIC-05: Frontend Interface & Design Tokens`**: CSS design tokens, responsive UI components, API integration.
-- **`EPIC-06: Security Audit, Hardening & Quality Gate`**: SAST analysis, OWASP verification, sign-off.
-
-### Step 2: Formulate Granular Stories (INVEST Compliant)
-Decompose each Epic into executable Stories adhering to:
-- **Independent**: Minimize overlapping dependencies so tasks can be developed in parallel where possible.
-- **Negotiable**: Capture the requirement and business goal; leave technical craftsmanship to developer.
-- **Valuable**: Clear value proposition (user-facing value or architectural enabler).
-- **Estimable**: Provide Story Points (1, 2, 3, 5, 8). If a story is estimated > 8 points, split it into smaller stories!
-- **Small**: Aim for 1 to 5 story points per story for rapid execution.
-- **Testable**: Include explicit, deterministic acceptance criteria.
-
----
-
-## 3. Best Practice Ticket Structure
-
-Each story must strictly follow this structure:
-
-```markdown
-### STORY-[EpicNum].[StoryNum]: [Action-Oriented Title]
-- **Epic**: EPIC-[EpicNum] - [Epic Name]
-- **Type**: [User Story | Technical Enabler | Bugfix | Security Hardening]
-- **Assigned Agent**: [Dev Junior] | [Dev Senior] | [WebDesigner] | [Security / Segurança]
-- **Priority**: P0 (Critical/Blocker) | P1 (High) | P2 (Medium) | P3 (Low)
-- **Estimation**: [Points: 1, 2, 3, 5, 8] | [Size: XS, S, M, L, XL]
-- **Dependencies**: 
-  - Blocked by: [STORY-XX.YY or None]
-  - Blocks: [STORY-XX.ZZ or None]
-
-#### 1. Narrative
-**As a** [role/persona/developer]  
-**I want** [capability/action]  
-**So that** [value/benefit]  
-
-#### 2. Technical Context & Scope
-- **Target Files**:
-  - `src/path/to/file.ts` (Create / Edit)
-- **API Contracts & Endpoints**:
-  - `POST /api/v1/resource` (Payload schema, response status)
-- **Database / Entities**:
-  - Migration script, indexes, constraints
-
-#### 3. Acceptance Criteria (BDD / Gherkin)
-```gherkin
-Scenario: [Successful Happy Path]
-  Given [initial context or valid payload]
-  When [action occurs or endpoint is requested]
-  Then [expected outcome and HTTP status]
-  And [side effects, database updates, or emitted events]
-
-Scenario: [Validation Failure or Edge Case]
-  Given [invalid input or unauthorized session]
-  When [action is triggered]
-  Then [appropriate error envelope is returned]
-```
-
-#### 4. Verification Checklist
-- [ ] Implementation matches architectural specifications.
-- [ ] Schema validation applied (Zod/Pydantic).
-- [ ] Unit tests implemented with >= 80% coverage.
-- [ ] No linter or TypeScript type errors.
-- [ ] OWASP security guidelines adhered to (no secrets, parameterized queries).
-```
-
----
-
-## 4. Agent Assignment Matrix
-
-Assign agents according to architectural complexity:
-
-| Complexity & Risk | Example Scope | Assigned Agent |
-|---|---|---|
-| Visual Design & Assets | CSS tokens, Figma to CSS, UI mockups, accessibility contrast | **`[WebDesigner]`** |
-| Standard Implementations | CRUD controllers, typed repositories, Zod schemas, UI components | **`[Dev Junior]`** |
-| Architectural & Critical | Token rotation, Argon2 hashing, concurrency, transactions, base setup | **`[Dev Senior]`** |
-| Security & Compliance | Threat modeling, SAST audit, OWASP verification, Security Gate | **`[Security / Segurança]`** |
-
----
-
-## 5. Output Generation: `docs/tickets.md`
-
-1. Ensure the `docs/` folder exists in the project.
-2. Compile all Epics, Dependency Graphs, Summary Metrics, and Stories into:
-   `docs/tickets.md`
-3. Provide a Summary Dashboard at the top of `docs/tickets.md`:
-   - Total Epics & Total Stories count
-   - Total Story Points
-   - Distribution of tasks across `[Dev Junior]`, `[Dev Senior]`, `[WebDesigner]`, `[Security]`
-   - Visual Mermaid dependency diagram
-4. Inform the user once generated, highlighting the next step for development execution.
+## 4. Output `docs/tickets.md`
+1. Create `docs/` if needed.
+2. Top of the file: summary dashboard (epic and story counts, total SP, distribution by role) and a Mermaid dependency diagram (template Â§1).
+3. Then the Epics catalog and the Stories catalog.
+4. Tell the user it is ready and which stories to execute first.

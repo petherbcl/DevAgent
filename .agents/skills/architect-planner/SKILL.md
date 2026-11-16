@@ -9,69 +9,33 @@ description: >-
 
 # Skill: Architectural Planning and Blueprint Generation (.md)
 
-This skill guides the **Architect** in cross-cutting project design, ensuring frontend UI/UX standard compliance and backend best practices.
+Rules and task-division criteria live in [arquiteto.md](../../personas/arquiteto.md); this is the procedure.
 
----
+## 1. Elicitation (Never Assume)
+Confirm each point with the user before designing. Anything not made explicit â†’ ask direct questions and wait; do not draft the plan (a request like "Create a blog" yields questions, not a plan).
+- [ ] **Domain, scope & scale**: primary objective, main workflows/use cases, expected users, traffic and data volume.
+- [ ] **Stack & constraints**: language/framework preferences (e.g. Node/TypeScript, Python/FastAPI, Go; React, Next.js, Vue) and hosting constraints.
+- [ ] **Data**: core entities; relational (PostgreSQL, SQLite, MySQL) vs NoSQL (MongoDB); caching (Redis).
+- [ ] **Auth & permissions**: JWT, sessions, OAuth/social login, magic links, RBAC.
+- [ ] **Interface & audience**: is there a web/mobile UI? who is the end user (B2B, B2C, internal dashboard)? SEO or i18n needs?
 
-## 1. Core Rule: Elicitation Without Assumptions
+## 2. WebDesigner Coordination
+**Required** for any user-facing graphical interface (web/mobile app, dashboard, landing page, admin panel, emails/templates with visual identity). **Not required** for pure APIs, CLIs, workers or backend-only changes: write "No UI in scope" in plan Â§5. Unclear whether a UI exists â†’ ask the user.
 
-Before designing any solution, conduct the alignment interview with the user:
+1. **Brief**: fill [design-brief.template.md](../../../templates/design-brief.template.md) from the validated use cases (user profile, desired feel, screens/components, expected deliverables) and send it to the WebDesigner.
+2. **Wait**: no frontend section, frontend task or visual decision until it delivers (tokens and mockups under `docs/design/`, component states, handoff note).
+3. **Build from the deliverables**, never from your own assumptions:
+   - Plan Â§5 embeds/references the delivered tokens, typography, layout and mockup paths verbatim.
+   - Frontend tasks (pages, components, style implementation) derive from the mockups and cite the mockup file in *Files* / *Acceptance Criteria*.
+   - Each screen's acceptance criteria include the component states (Default, Hover, Active, Focus, Disabled, Loading), the WebDesigner's WCAG notes and UX principles (Nielsen's heuristics, loading states, error feedback).
+4. **Reconcile**: a conflict between the design and a technical constraint (stack, performance, accessibility) becomes an open point for the user; never silently change the design or the architecture.
 
-### Mandatory Elicitation Checklist
-- [ ] **Scope & Use Cases**: What are the primary workflows?
-- [ ] **Tech Stack**: Are there language/framework preferences or hosting constraints?
-- [ ] **Data Model**: What core entities exist and what volume is expected?
-- [ ] **Authentication & Security**: Is JWT, session-based auth, OAuth, or RBAC required?
-- [ ] **Interface & Design**: Does the project have a web/mobile frontend? Does it require mockups from WebDesigner?
+## 3. Writing the Plan
+Save to `docs/architecture-plan.md` (or `plan.md` at the root) following [architecture-plan.template.md](../../../templates/architecture-plan.template.md). Every task has: ID, title, role tag (`[Dev Junior]` / `[Dev Senior]`, criteria in the persona), technical description, files to create/edit, acceptance criteria.
 
-> [!CAUTION]
-> If any of the above points were not made explicit by the user, **DO NOT GUESS**. Ask direct questions and await the response before finalizing the plan.
+## 4. Validation Before Handoff
+1. Every API route has a semantic HTTP method and defined payload formats.
+2. The Controller â†’ Service â†’ Repository separation is explicit.
+3. Every acceptance criterion is verifiable and testable.
 
----
-
-## 2. Coordination with WebDesigner
-
-### 2.1 When to involve the WebDesigner
-- **Required** when the project or feature has any user-facing graphical interface (web/mobile app, dashboard, landing page, admin panel, visual templates).
-- **Not required** for pure APIs, CLIs, workers, or backend-only changes: write "No UI in scope" in section 5 of the plan.
-- If it is unclear whether a UI exists, ask the user (Elicitation Checklist) — do not guess.
-
-### 2.2 Procedure (UI in scope)
-1. **Brief**: fill [design-brief.template.md](../../../templates/design-brief.template.md) from the validated use cases (user profile, desired feel, screens/components required, expected deliverables) and send it to the **WebDesigner**.
-2. **Wait for the output**: do not draft the Frontend section, the frontend tasks, or any visual decision before the WebDesigner delivers (CSS tokens, mockups/prototypes under `docs/design/`, component states, handoff note).
-3. **Read the deliverables** (tokens file, mockups, handoff note) and build the plan from them — never from your own assumptions:
-   - Section 5 embeds/references the delivered tokens, typography, layout structure, and mockup paths verbatim.
-   - Frontend tasks (pages, components, style implementation) are derived from the mockups and cite the mockup file they implement.
-   - Component states (Default, Hover, Active, Focus, Disabled, Loading) and WCAG notes from the WebDesigner appear in the acceptance criteria of each screen.
-4. **Reconcile**: if the design conflicts with a technical constraint (stack, performance, accessibility), flag it as an open point for the user instead of silently changing the design or the architecture.
-5. Ensure UX principles (Nielsen's Heuristics, loading states, error feedback) are present in the acceptance criteria of each screen.
-
-> [!NOTE]
-> The Architect never invents tokens, palettes, or layouts. Visual identity belongs to the WebDesigner; the Architect only integrates it.
-
----
-
-## 3. Structuring the Architecture Plan (`plan.md`)
-
-The final plan must be saved in `docs/architecture-plan.md` or at the root as `plan.md` following the template:
-- Consult the official template at: [architecture-plan.template.md](../../../templates/architecture-plan.template.md)
-
-### Mandatory Task Breakdown:
-- Tasks assigned to `[Dev Junior]`:
-  - Data model creation and standard migrations.
-  - Basic backend CRUD following defined layered architecture.
-  - Static UI components and pages consuming ready APIs.
-  - Style implementation based on created tokens.
-- Tasks assigned to `[Dev Senior]`:
-  - Initial setup of base architecture and dependency injection.
-  - Core authentication system, token rotation, and security middlewares.
-  - Complex algorithms, concurrency, financial transactions, and high-performance queries.
-  - Code review and resolution of blockers escalated by Junior Dev.
-
----
-
-## 4. Prior Plan Validation
-Before handing over the plan to the user and developers, confirm:
-1. Do all API routes feature semantic HTTP methods and defined payload formats?
-2. Is the layered separation (Controller -> Service -> Repository) explicit?
-3. Are all acceptance criteria verifiable and testable?
+Then hand the plan to the Ticket Planner.

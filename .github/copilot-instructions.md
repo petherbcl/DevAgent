@@ -20,3 +20,4 @@ Always apply best practices from `.agents/rules/`:
 - Backend: `fullstack-engineering-standards.md`
 - Architecture: `clean-code-and-architecture.md`
 - Security: `secure-coding-and-owasp.md`
+- Third-party skills check: `third-party-skills.md`

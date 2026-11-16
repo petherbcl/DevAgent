@@ -67,6 +67,7 @@ All agents must adhere to the rule manuals defined in `.agents/rules/`:
 - **Quality & Clean Code**: [clean-code-and-architecture.md](.agents/rules/clean-code-and-architecture.md)
 - **Security & OWASP**: [secure-coding-and-owasp.md](.agents/rules/secure-coding-and-owasp.md)
 - **Collaboration & Handoff**: [agent-collaboration-protocol.md](.agents/rules/agent-collaboration-protocol.md)
+- **Third-Party Skills Check**: [third-party-skills.md](.agents/rules/third-party-skills.md)
 
 ---
 

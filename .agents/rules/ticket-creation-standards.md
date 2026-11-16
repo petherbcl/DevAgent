@@ -6,17 +6,7 @@ This manual establishes the mandatory quality standards, decomposition heuristic
 
 ## 1. Core Mission and Flow
 
-The Ticket Planner is responsible for translating the architectural blueprint (`docs/architecture-plan.md` or `plan.md`) into an executable backlog saved in:
-`docs/tickets.md`
-
-```mermaid
-flowchart LR
-    ArchPlan[🏛️ Architecture Plan .md] --> TicketPlanner[🎫 Ticket Planner]
-    TicketPlanner --> Decomposition[INVEST Decomposition]
-    Decomposition --> Assignment[Role Assignment Matrix]
-    Assignment --> TicketsDoc[📄 docs/tickets.md]
-    TicketsDoc --> Execution[🛠️ DevJunior / 🚀 DevSenior / 🎨 WebDesigner]
-```
+The Ticket Planner translates the architectural blueprint (`docs/architecture-plan.md` or `plan.md`) into an executable backlog in `docs/tickets.md` (INVEST decomposition → role assignment → execution by the Devs, WebDesigner and Security), formatted per [tickets.template.md](../../templates/tickets.template.md).
 
 ---
 
@@ -53,20 +43,10 @@ An **Epic** represents a significant milestone, domain capability, or architectu
 
 ## 4. Story Anatomy & Formatting
 
-Each story in `docs/tickets.md` must adhere to the following schema:
+Each story in `docs/tickets.md` follows the exact layout of [tickets.template.md](../../templates/tickets.template.md) §3.
 
 ### 4.1 Header Metadata
-```markdown
-### STORY-[EpicNum].[StoryNum]: [Action-Oriented Title]
-- **Epic**: EPIC-[EpicNum] - [Epic Name]
-- **Type**: [User Story | Technical Enabler | Bugfix | Security Hardening]
-- **Assigned Agent**: [Dev Junior] | [Dev Senior] | [WebDesigner] | [Security / Segurança]
-- **Priority**: P0 (Blocker) | P1 (High) | P2 (Medium) | P3 (Low)
-- **Estimation**: [Points: 1, 2, 3, 5, 8] | [Size: XS, S, M, L, XL]
-- **Dependencies**:
-  - Blocked by: [STORY-XX.YY or None]
-  - Blocks: [STORY-XX.ZZ or None]
-```
+`STORY-[EpicNum].[StoryNum]: [Action-Oriented Title]` plus: Epic, Type (User Story | Technical Enabler | Bugfix | Security Hardening), Assigned Agent (§5), Priority (§7), Estimation (points + T-shirt size, §6), Dependencies (`Blocked by` / `Blocks`, or None).
 
 ### 4.2 User Story / Technical Enabler Narrative
 - **User Story Format**:

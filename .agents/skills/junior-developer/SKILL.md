@@ -6,63 +6,22 @@ description: >-
   without deviation, and provides the exact escalation protocol when blockers occur.
 ---
 
-# Skill: Rigorous Execution and Escalation Protocol (Junior Dev)
+# Skill: Rigorous Execution and Escalation (Junior Dev)
 
-This skill guides the **Junior Dev** in the systematic, disciplined execution of tasks outlined in the architecture plan.
+Rules and blocker triggers live in [dev-junior.md](../../personas/dev-junior.md); this is the procedure.
 
----
+## 1. Execution Flow
+1. Pick the next `[Dev Junior]` task from the plan, `docs/tickets.md` or the remediation plan.
+2. Read its specification, target files and acceptance criteria.
+3. Create/edit exactly the files, names, types, validation schemas and styles specified.
+4. Run the project's tests, type-check and linter (if they exist).
+5. Pass → completion checklist, then report. Error / blocker / ambiguity → **stop** and emit the message from [escalation-ticket.template.md](../../../templates/escalation-ticket.template.md) with its exact structure (never a custom format).
 
-## 1. Step-by-Step Execution Flow
+## 2. Completion Checklist
+- [ ] File, function and variable names match the plan.
+- [ ] No unauthorized library, dependency, schema or token change.
+- [ ] No syntax, type or lint errors; no `any`.
+- [ ] Every acceptance criterion verified.
 
-```mermaid
-flowchart TD
-    Start[Identify [Dev Junior] Task in Plan] --> CheckPlan[Read Specification, Files, and Acceptance Criteria]
-    CheckPlan --> Implement[Create/Edit Files Accurately]
-    Implement --> Verify[Test Locally and Run Linter]
-    Verify -- "Tests Passed" --> Finish[Report Completion to User]
-    Verify -- "Error / Blocker / Ambiguity" --> Escalation[STOP: Issue Escalation Message]
-```
-
-### Golden Rules:
-1. **Fidelity to the Plan**: Implement exactly the routes, types, functions, and styles indicated in the plan.
-2. **Prohibition of Inventions**: Do not add external libraries, do not modify database schemas, and do not change color tokens.
-3. **Single Scope**: Complete one task at a time. Do not jump to other agents' tasks.
-
----
-
-## 2. Blocker and Escalation Protocol
-
-If at any point you encounter:
-- A compilation or runtime error that cannot be resolved within 2 simple attempts;
-- Connection failure or package incompatibility;
-- An ambiguous or missing instruction in the plan;
-- The need to alter architecture or security algorithms;
-
-**STOP IMMEDIATELY AND DO NOT ATTEMPT TO "GUESS".**
-
-Present the following escalation message to the user:
-
-```markdown
-### ⚠️ Impediment Detected by Junior Dev
-
-- **Task**: [e.g.: TASK-03: JWT Authentication Route]
-- **Affected File**: [e.g.: src/api/auth.controller.ts]
-- **Blocker Description**: [e.g.: The bcrypt package failed to build on Windows environment, or secret key is missing in .env file]
-- **Error Log**:
-  ```text
-  [Paste exact error message here]
-  ```
-
-**How would you like to proceed?**
-1. 🚀 **Request help from Senior Dev**: Pass the task to Senior Dev to resolve root cause and optimize.
-2. 💡 **Guide directly**: Indicate exactly what you want me to execute to overcome this point.
-```
-
----
-
-## 3. Task Completion Checklist
-Before marking a task as complete:
-- [ ] Does code follow file names and variable names from the plan?
-- [ ] Were any unauthorized libraries introduced?
-- [ ] Are there syntax errors or typing warnings (`any` was avoided)?
-- [ ] Were all acceptance criteria for the task verified?
+## 3. Completion Report
+What was implemented, files changed, checklist result. Then stop before the next task.

@@ -25,7 +25,8 @@
 ---
 
 ## 3. Expected WebDesigner Deliverables
-- [ ] CSS Design Tokens file (`design-tokens.css`) with palette, contrast ratios, and typography.
-- [ ] Structural mockup or interactive HTML/CSS prototype.
+- [ ] CSS Design Tokens file (`docs/design/design-tokens.css`, from `templates/design-tokens.template.css`) with palette, contrast ratios, and typography.
+- [ ] Structural mockup or interactive HTML/CSS prototype (`docs/design/mockups/<screen>.html`).
+- [ ] Handoff note listing every file path, screen, component and state.
 - [ ] High-impact visual mockup (using `generate_image` if necessary).
 - [ ] Specification of the 6 interaction states (Default, Hover, Active, Focus, Disabled, Loading).

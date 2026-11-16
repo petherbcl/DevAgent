@@ -1,135 +1,49 @@
 # Agent Collaboration and Handoff Protocol
 
-This document establishes the integrated workflow, handoffs, and communication rules among the 6 ecosystem agents.
+Workflow, handoffs and communication rules among the 6 ecosystem agents. Each agent's full behavior lives in its persona (`.agents/personas/`); this file defines only what crosses agent boundaries.
 
 ---
 
 ## 1. Project Lifecycle Flow
 
-```
-   [1. Start / User Request]
-                  │
-                  ▼
-         [🏛️ Architect]
-         ├── User Interview & Elicitation (Direct Questions)
-         └── Mockup & Token Request to [🎨 WebDesigner]
-                  │
-                  ▼
-         [🎨 WebDesigner]
-         └── Generates: HSL Palette, Typography, Layouts, Visual Mockups, and CSS Tokens
-                  │
-                  ▼
-         [🏛️ Architect]
-         └── Compiles Full Plan in Markdown format (.md)
-                  │
-                  ▼
-      [🎫 Ticket Planner / Product Owner]
-      ├── Ingests Architecture Plan (.md)
-      ├── Applies INVEST Criteria & BDD/Gherkin Scenarios
-      └── Compiles Backlog into: docs/tickets.md
-          (Epics, Stories, SP Estimation, and Role Assignment)
-                  │
-                  ├────────────────────────┬────────────────────────┐
-                  ▼                                                 ▼
-        [🛠️ Junior Dev]                                   [🚀 Senior Dev]
-   (Standard Stories & CRUD)                    (Critical Setup, Auth, Complex DB)
-                  │                                                 │
-    ┌─────────────┴─────────────┐                                   │
-    ▼                           ▼                                   │
-[Executes Successfully]  [Encounters Blocker/Error]                 │
-                         Ask the User:                              │
-                         "Do you want to pass to Senior Dev         │
-                          or prefer to guide directly?"             │
-                                │                                   │
-                                ├─────────(If Senior Dev)───────────┤
-                                                                    ▼
-                                                            [🚀 Senior Dev]
-                                                      (Resolves, Optimizes, Unblocks)
-                                                                    │
-                  ┌─────────────────────────────────────────────────┘
-                  │ (Completed Code Batches)
-                  ▼
-       [🛡️ Security Specialist]
-       ├── Code & Configuration Audit (OWASP / Secure Coding)
-       ├── Post-Development Evaluation (Security Quality Gate)
-       │
-       ├──► [If Vulnerabilities Found]:
-       │    └── Issues Remediation Plan (.md) with [Junior] and [Senior] Tasks
-       │        (Returns to Devs for Immediate Remediation)
-       │
-       └──► [If Approved]:
-            └── Issues Granted Security Sign-Off
-                  │
-                  ▼
-         [Final Validation and Delivery]
-```
+User → 🏛️ Architect (interview) ⇄ 🎨 WebDesigner (only if UI) → architecture plan → 🎫 Ticket Planner → `docs/tickets.md` → 🛠️ Junior / 🚀 Senior Dev → 🛡️ Security Gate → (remediation loop back to the devs) → Security Sign-Off → final validation and delivery.
+
+| Agent | Receives | Delivers | Hands off to |
+|---|---|---|---|
+| 🏛️ Architect | user request and answers; WebDesigner output | `docs/architecture-plan.md` / `plan.md` from `templates/architecture-plan.template.md` | Ticket Planner |
+| 🎨 WebDesigner | brief from `templates/design-brief.template.md` | tokens, mockups, 6 component states, handoff note (`docs/design/`) | Architect |
+| 🎫 Ticket Planner | architecture plan | `docs/tickets.md` | Devs |
+| 🛠️ Junior Dev | `[Dev Junior]` tickets/tasks | code, or the escalation message on a blocker | Security, or user decision |
+| 🚀 Senior Dev | `[Dev Senior]` tasks, escalated blockers | code + optimization notes | Security |
+| 🛡️ Security | completed batch | remediation plan, or Sign-Off | Devs, or delivery |
 
 ---
 
 ## 2. Agent-Specific Rules
 
-### 2.1 🏛️ Architect: Elicitation and Blueprint Protocol
-1. **No-Assumption Rule**:
-   - If the user merely says "Create a blog", the Architect **DOES NOT START CODING**.
-   - The Architect immediately formulates structured questions regarding:
-     - Expected traffic volume and scalability.
-     - Desired authentication system (JWT, OAuth, Magic Links).
-     - Database preference (PostgreSQL, SQLite, MongoDB) and tech stack.
-     - User profiles and specific SEO or internationalization requirements.
-2. **Collaboration with WebDesigner**:
-   - Whenever the project includes a graphical user interface, the Architect summons the WebDesigner (via a briefing from `templates/design-brief.template.md`) to define the visual identity and key components before concluding frontend architecture. Backend-only work does not require it.
-   - The Architect then builds the Frontend section and frontend tasks from the WebDesigner's output (tokens, mockups, component states, handoff note) and does not invent visual decisions.
-3. **`.md` Plan Generation**:
-   - The plan must adhere to the official template in `templates/architecture-plan.template.md`.
-   - Each task must contain: ID, Title, Assigned Agent (`[Dev Junior]` or `[Dev Senior]`), Technical Description, Files to create/edit, and Acceptance Criteria.
+### 2.1 🏛️ Architect: Elicitation and Blueprint
+- **No-assumption rule**: a request like "Create a blog" yields structured questions (traffic/scale, authentication, database and stack, user profiles, SEO/i18n), never code or a plan.
+- **UI in scope** → brief the WebDesigner first and build the frontend section and tasks from its output; never invent visual decisions. Backend-only → no WebDesigner.
+- Each plan task has: ID, title, assigned agent (`[Dev Junior]` / `[Dev Senior]`), technical description, files to create/edit, acceptance criteria.
 
-### 2.2 🎨 WebDesigner: Visual Handoff Protocol
-1. The WebDesigner translates functional requirements into:
-   - Color palette formatted as CSS Tokens (`:root { --bg-primary: ... }`).
-   - Structural mockups (wireframes, prototype HTML/CSS code, or images using the visual generation tool when applicable).
-   - Atomic visual components described with all 6 mandatory states (Default, Hover, Active, Focus, Disabled, Loading).
-2. The WebDesigner delivers these tokens and guidelines to the Architect for formal inclusion in the plan.
+### 2.2 🎨 WebDesigner: Visual Handoff
+Delivers to the Architect, for formal inclusion in the plan: CSS tokens in `:root`, structural mockups / HTML-CSS prototypes, components with all 6 states (Default, Hover, Active, Focus, Disabled, Loading), and a handoff note.
 
-### 2.3 🎫 Ticket Planner: Agile Backlog & Decomposition Protocol
-1. **Blueprint Ingestion**:
-   - Ingests the architecture plan (`docs/architecture-plan.md` or `plan.md`) without inventing or hallucinating scope outside the blueprint.
-2. **INVEST & BDD Deconstruction**:
-   - Groups architecture tasks into strategic **Epics**.
-   - Decomposes Epics into **User Stories** and **Technical Enablers** satisfying INVEST criteria (Independent, Negotiable, Valuable, Estimable, Small, Testable).
-   - Formulates verifiable acceptance criteria using BDD/Gherkin syntax (`Scenario: ... Given ... When ... Then ...`) and actionable verification checklists.
-3. **Estimation and Role Distribution**:
-   - Estimates complexity in Fibonacci Story Points (1, 2, 3, 5, 8). Splits any story estimated > 8 SP.
-   - Maps each story to the appropriate agent: `[Dev Junior]`, `[Dev Senior]`, `[WebDesigner]`, or `[Security / Segurança]`.
-4. **Deliverable**:
-   - Compiles and writes the backlog to `docs/tickets.md`.
+### 2.3 🎫 Ticket Planner: Backlog Decomposition
+Ingests the plan without inventing scope; groups tasks into Epics and INVEST stories with Gherkin criteria and checklists; Fibonacci SP (1, 2, 3, 5, 8; split > 8); one role tag per story (`[Dev Junior]`, `[Dev Senior]`, `[WebDesigner]`, `[Security / Segurança]`); writes `docs/tickets.md`.
 
-### 2.4 🛠️ Junior Dev: Strict Execution and Escalation Protocol
-1. **Strict Execution**:
-   - The Junior Dev reads the plan or `docs/tickets.md` generated by the Ticket Planner.
-   - Executes strictly one task at a time.
-   - **Never modifies**: selected libraries, API route names, data types, or design tokens outside the plan.
-2. **Blocker Protocol (Mandatory)**:
-   - If a persistent compilation error, concurrency bug, incompatible dependency, or omission in the plan is found, the Junior Dev **HALTS THE TASK IMMEDIATELY**.
-   - Must issue the **"Technical Impediment Detected"** message exactly as defined in [escalation-ticket.template.md](../../templates/escalation-ticket.template.md) (task, what was attempted, error/evidence, and the two options: escalate to Senior Dev or guide directly). That template is the single source of the message.
+### 2.4 🛠️ Junior Dev: Strict Execution and Escalation
+- Reads the plan or `docs/tickets.md`, executes one task at a time, and never modifies libraries, API route names, data types or design tokens outside the plan.
+- **Blocker protocol (mandatory)**: on a persistent compilation error, concurrency bug, incompatible dependency or plan omission, the Junior Dev **halts the task immediately** and issues the **"Technical Impediment Detected"** message exactly as defined in [escalation-ticket.template.md](../../templates/escalation-ticket.template.md), the single source of the message. The user chooses: escalate to the Senior Dev or guide directly.
 
-### 2.5 🚀 Senior Dev: Resolution and Optimization Protocol
-1. When taking on a complex or Junior-escalated task:
-   - Analyzes root cause of the issue.
-   - Applies the most elegant, resilient, and performant solution.
-   - Has authority to refactor and modernize adjacent code, provided it respects the Architect's plan objectives and security standards.
-2. **Record of Improvements**:
-   - Upon completing the task, the Senior Dev succinctly lists implemented improvements (e.g., query optimization, Repository pattern implementation, concurrency handling).
+### 2.5 🚀 Senior Dev: Resolution and Optimization
+Takes complex or escalated tasks: finds the root cause, applies the most resilient and performant solution, may refactor adjacent code within the plan's objectives and security standards, and lists the improvements made.
 
-### 2.6 🛡️ Security Specialist: Audit and Security Gate Protocol
-1. **Mandatory Post-Development Evaluation**:
-   - **Trigger**: Whenever the Junior Dev or Senior Dev finishes developing a feature, task batch, or module, the Security Specialist steps in to audit the code.
-   - **Criteria**: Checks strict compliance with [secure-coding-and-owasp.md](secure-coding-and-owasp.md) (OWASP Top 10, API Security Top 10, sanitization, authentication, and access control).
-2. **Remediation Cycle**:
-   - If vulnerabilities are found, generates a detailed plan based on `templates/security-audit-plan.template.md`.
-   - Distributes fixes between `[Dev Junior]` (standard tasks) and `[Dev Senior]` (architectural or critical tasks).
-   - Reevaluates code following developer remediations.
-3. **Security Sign-Off**:
-   - Grants final approval only when zero critical or high vulnerabilities remain open.
+### 2.6 🛡️ Security Specialist: Audit and Security Gate
+- **Trigger**: whenever a developer finishes a feature, task batch or module.
+- **Criteria**: [secure-coding-and-owasp.md](secure-coding-and-owasp.md) (OWASP Top 10, API Security Top 10, sanitization, authentication, access control).
+- **Remediation cycle**: findings → plan from `templates/security-audit-plan.template.md`, split between `[Dev Junior]` (standard) and `[Dev Senior]` (architectural/critical); re-audit after the fixes.
+- **Sign-Off** only when zero Critical/High vulnerabilities remain open.
 
 ### 2.7 🔄 Plan Change Protocol (Requirement Changes Mid-Project)
 When the user changes, adds or removes requirements after the plan exists, nobody edits code or tickets first. The change flows top-down:
@@ -148,15 +62,5 @@ When the user changes, adds or removes requirements after the plan exists, nobod
 
 **Orchestration note**: a developer who discovers the plan is wrong or incomplete must not fix it themselves; they use the Blocker Protocol (§2.4), and the resulting decision enters this flow if it changes scope.
 
-### 2.8 🧩 Third-Party Skills Check (All Agents, Before Starting)
-Third-party skills (e.g. `transitions-dev`, `transitions-polish`) are pinned in `skills-lock.json` at the project root but their content is git-ignored (license), so a fresh clone does not have them. Every agent runs this check **once per session, before its first task**:
-
-1. **Detect**: read `skills-lock.json`. If it does not exist, skip this section. Otherwise, for each skill name under `skills`, check that `.agents/skills/<name>/SKILL.md` exists.
-2. **All present**: proceed normally, saying nothing.
-3. **Some missing, and you can talk to the user** (main conversation / chat):
-   - Ask **once**, listing the missing skills and the exact command, for example: *"The third-party skills `transitions-dev`, `transitions-polish` (listed in `skills-lock.json`) are not installed. Do you want me to install them with `npx skills experimental_install -a codex`?"*
-   - **Yes** → run exactly `npx skills experimental_install -a codex` from the project root, confirm every `.agents/skills/<name>/SKILL.md` now exists, report the result, then continue with the task. If the command fails, show the error and continue without the skills.
-   - **No** → continue without them and do not ask again in the same session. Where a missing skill would have been used, fall back to the in-house rules (e.g. [ui-ux-best-practices.md](ui-ux-best-practices.md) §2.5 micro-interaction values for transitions) and mention the fallback in your report.
-4. **Some missing, and you are a subagent** (cannot ask the user): do **not** install anything. Start your final report with the line `Third-party skills missing: <names>. Ask the user whether to run: npx skills experimental_install -a codex`, then do the task using the fallback above. The orchestrator asks the user and, on yes, runs the command.
-
-**Guardrails**: never run the install without the user's explicit "yes"; always keep `-a codex` (it installs only into `.agents/skills/`; without it the CLI replaces the `.claude/skills/` thin wrappers with junctions); never run other `npx skills` commands (`add`, `update`, `remove`) on your own initiative; never commit the downloaded folders.
+### 2.8 🧩 Third-Party Skills Check
+Defined in [third-party-skills.md](third-party-skills.md): every agent runs it once per session, before its first task.

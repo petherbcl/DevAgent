@@ -155,6 +155,8 @@ All agents adhere to centralized rules in `.agents/rules/`:
    - Strict TypeScript typing (no `any`).
 6. 🤝 **[agent-collaboration-protocol.md](.agents/rules/agent-collaboration-protocol.md)**:
    - Communication workflows, formal handoff across the 6 agents, and Security Gate protocol.
+7. 🧩 **[third-party-skills.md](.agents/rules/third-party-skills.md)**:
+   - Once-per-session check that the skills pinned in `skills-lock.json` are installed (ask before installing).
 
 ---
 

@@ -99,8 +99,8 @@ export const UserRegistrationCard: React.FC = () => {
     try {
       // Typed API call
       // ...
-    } catch (err: any) {
-      setErrorMessage(err.message || 'An unexpected error occurred during registration.');
+    } catch (err: unknown) {
+      setErrorMessage(err instanceof Error ? err.message : 'An unexpected error occurred during registration.');
     } finally {
       setLoading(false);
     }
